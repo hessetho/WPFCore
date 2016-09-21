@@ -1,0 +1,83 @@
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.csprojResolveAssemblyReference.cache
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\bin\Debug\WPFCore.dll
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\bin\Debug\WPFCore.pdb
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.dll
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.pdb
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\Brushes.baml
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\CoreStyles.baml
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\DataGridStyleDictionary.baml
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\OtherStyleDictionary.baml
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\Win7Styles.baml
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextBoxWindow.g.cs
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore_MarkupCompile.cache
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore_MarkupCompile.lref
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextBoxWindow.baml
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\ValidationStyles.baml
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.g.resources
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\bin\Debug\WPFCore.dll
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\bin\Debug\WPFCore.pdb
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\Brushes.baml
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\CoreStyles.baml
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\DataGridStyleDictionary.baml
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\OtherStyleDictionary.baml
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\Win7Styles.baml
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextBoxWindow.g.cs
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore_MarkupCompile.cache
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore_MarkupCompile.lref
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextBoxWindow.baml
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\ValidationStyles.baml
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.g.resources
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.dll
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.pdb
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\bin\Debug\WPFCore.dll
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\bin\Debug\WPFCore.pdb
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\themes\generic.baml
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\Brushes.baml
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\CoreStyles.baml
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\DataGridStyleDictionary.baml
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\OtherStyleDictionary.baml
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\Win7Styles.baml
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextBoxWindow.g.cs
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore_MarkupCompile.cache
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore_MarkupCompile.lref
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\themes\ExceptionGalleryDefaultStyle.baml
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\themes\InputFilenameDefaultStyle.baml
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextBoxWindow.baml
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\Styles\ValidationStyles.baml
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.g.resources
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.dll
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.pdb
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\themes\generic.baml
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\themes\ExceptionGalleryDefaultStyle.baml
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\themes\InputFilenameDefaultStyle.baml
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.csprojResolveAssemblyReference.cache
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\themes\generic.baml
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\themes\ExceptionGalleryDefaultStyle.baml
+C:\Users\thesse\Documents\Development\VS Sources\WPFCore\WPFCore\obj\Debug\themes\InputFilenameDefaultStyle.baml
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\WPFCore.csprojResolveAssemblyReference.cache
+C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\themes\DateRangeSelectorDefaultStyle.baml
+E:\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\themes\DateRangeSelectorDefaultStyle.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\bin\Debug\WPFCore.dll
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\bin\Debug\WPFCore.pdb
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\WPFCore.csprojResolveAssemblyReference.cache
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\themes\generic.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\XAML\Styles\Brushes.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\XAML\Styles\CoreStyles.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\XAML\Styles\DataGridStyleDictionary.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\XAML\Styles\OtherStyleDictionary.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\XAML\Styles\Win7Styles.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextBoxWindow.g.cs
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\WPFCore_MarkupCompile.cache
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\WPFCore_MarkupCompile.lref
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\themes\DateRangeSelectorDefaultStyle.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\themes\ExceptionGalleryDefaultStyle.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\themes\InputFilenameDefaultStyle.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextBoxWindow.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\XAML\Styles\ValidationStyles.baml
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\WPFCore.g.resources
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\WPFCore.dll
+C:\Users\thors\Documents\Development\WPFCore\WPFCore\obj\Debug\WPFCore.pdb

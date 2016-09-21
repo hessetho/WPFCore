@@ -1,0 +1,19 @@
+﻿<!-- ==========================================================================
+ * WpfHelper: Sammlung von Hilfsfunktionen und Klassen zur Verwendung mit WPF
+ * 
+ * $Rev: 120 $
+ * $Id: generic.xaml 120 2011-02-09 14:08:58Z  $
+ * 
+ * (C) 2009-2012 ICEP GmbH, T. Hesse
+ * ========================================================================== -->
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/WPFCore;component/themes/InputFilenameDefaultStyle.xaml"/>
+        <ResourceDictionary Source="/WPFCore;component/themes/ExceptionGalleryDefaultStyle.xaml"/>
+        <ResourceDictionary Source="/WPFCore;component/themes/DateRangeSelectorDefaultStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

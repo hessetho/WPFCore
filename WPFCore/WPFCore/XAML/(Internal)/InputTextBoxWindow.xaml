@@ -1,0 +1,91 @@
+﻿<Window x:Class="WPFCore.XAML.InputTextBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:xaml="clr-namespace:WPFCore.XAML"
+        x:ClassModifier="internal"
+        x:Name="WindowInputTextBox"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="ToolWindow"
+        mc:Ignorable="d" 
+        ShowInTaskbar="True" 
+        xaml:PowerUp.FocusFirst="True"
+        Title="Input text">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,2,40,2" />
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="OrangeRed" DockPanel.Dock="right" Margin="5,0,0,0" 
+                                Width="20" Height="20" CornerRadius="5"
+                                ToolTip="{Binding ElementName=customAdorner, 
+                                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
+                                   FontWeight="Bold" Foreground="white" />
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!--<Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                                Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>-->
+        </Style>
+
+    </Window.Resources>
+    
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   TextWrapping="Wrap"
+                   Width="250"
+                   Text="{Binding ElementName=WindowInputTextBox, 
+                                  Path=MessageText,     
+                                  FallbackValue='Please enter a text:'
+                         }"/>
+        
+        <TextBox Grid.Row="1"
+                 Margin="0,5,20,0"
+                 Width="250"
+                 xaml:PowerUp.SelectTextOnFocus="True"
+                 Text="{Binding ElementName=WindowInputTextBox, 
+                                Path=InputText,
+                                UpdateSourceTrigger=PropertyChanged,
+                                ValidatesOnDataErrors=true, 
+                                NotifyOnValidationError=true}"/>
+        
+        <DockPanel Grid.Row="2"
+                   LastChildFill="False">
+            <Button DockPanel.Dock="Right"
+                    IsCancel="True"
+                    Width="60"
+                    Margin="5,2"
+                    Content="Cancel" 
+                    Click="CancelClicked" />
+            <Button DockPanel.Dock="Right"
+                    x:Name="OkayButton"
+                    IsDefault="True"
+                    Width="45"
+                    Margin="5,2"
+                    Content="Ok"
+                    Click="OkayClicked"/>
+        </DockPanel>
+    </Grid>
+</Window>

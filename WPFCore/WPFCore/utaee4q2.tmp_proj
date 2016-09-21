@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7083B616-F553-4F74-84B6-E1BE0F79F8F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WPFCore</RootNamespace>
+    <AssemblyName>WPFCore</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppContext.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="DataKiosk\DataKiosk.cs" />
+    <Compile Include="DataKiosk\DataPublishedEventArgs.cs" />
+    <Compile Include="DataKiosk\IDataSubscriber.cs" />
+    <Compile Include="Data\%28internal%29\PropertyComparer.cs" />
+    <Compile Include="Data\%28internal%29\PropertyComparerCollection.cs" />
+    <Compile Include="Data\DayGroupEnum.cs" />
+    <Compile Include="Data\MRUCollection.cs" />
+    <Compile Include="Data\Performance\CategoryDictionary.cs" />
+    <Compile Include="Data\Performance\PerformanceCenter.cs" />
+    <Compile Include="Data\Performance\PerformanceCollector.cs" />
+    <Compile Include="Data\Performance\PerformanceItem.cs" />
+    <Compile Include="Data\SerializableDictionary.cs" />
+    <Compile Include="Data\SortableList.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Helper\CultureHelper.cs" />
+    <Compile Include="Helper\DateTimeExtensions.cs" />
+    <Compile Include="Helper\DiagnosticsHelper.cs" />
+    <Compile Include="Helper\DispatcherHelper.cs" />
+    <Compile Include="Helper\EnumerableHelper.cs" />
+    <Compile Include="Helper\EnumHelper.cs" />
+    <Compile Include="Helper\ExceptionHelper.cs" />
+    <Compile Include="Helper\ReflectionHelper.cs" />
+    <Compile Include="Helper\StringHelper.cs" />
+    <Compile Include="Helper\StringValidCharactersAttribute.cs" />
+    <Compile Include="Helper\ThreadStarter.cs" />
+    <Compile Include="Helper\Toolbox.cs" />
+    <Compile Include="Helper\TraceHelper.cs" />
+    <Compile Include="Helper\VisualHelper.cs" />
+    <Compile Include="Helper\WindowExtensions.cs" />
+    <Compile Include="Helper\WpfScreen.cs" />
+    <Compile Include="NonFatalException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlClient\ISqlDataAdapterExtension.cs" />
+    <Compile Include="SqlClient\SharedSqlTransaction.cs" />
+    <Compile Include="SqlClient\SqlClientExtensions.cs" />
+    <Compile Include="SqlClient\SQLCodeWorks.cs" />
+    <Compile Include="SqlClient\SqlDataAdapterExtender.cs" />
+    <Compile Include="SqlClient\SqlDataReaderExtensions.cs" />
+    <Compile Include="SqlClient\SqlProcedure.cs" />
+    <Compile Include="SqlClient\SqlProcedureParameter.cs" />
+    <Compile Include="SqlClient\Tools.cs" />
+    <Compile Include="StatusText\StatusTextBroker.cs" />
+    <Compile Include="StatusText\StatusTextListener.cs" />
+    <Compile Include="StatusText\StatusUpdateEventArgs.cs" />
+    <Compile Include="ViewModelSupport\%28Advanced%29\DependsOnAttribute.cs" />
+    <Compile Include="ViewModelSupport\%28Advanced%29\ExtendedValidationViewModelBase.cs" />
+    <Compile Include="ViewModelSupport\ClassValidationAttribute.cs" />
+    <Compile Include="ViewModelSupport\CollectionViewModelBase.cs" />
+    <Compile Include="ViewModelSupport\DialogService.cs" />
+    <Compile Include="ViewModelSupport\DoesNotAffectChangesFlag.cs" />
+    <Compile Include="ViewModelSupport\DontTraceMeAttribute.cs" />
+    <Compile Include="ViewModelSupport\HasChangedEventArgs.cs" />
+    <Compile Include="ViewModelSupport\InstanceValidationAttribute.cs" />
+    <Compile Include="ViewModelSupport\ITraceInformationProvider.cs" />
+    <Compile Include="ViewModelSupport\IValidationExceptionHandler.cs" />
+    <Compile Include="ViewModelSupport\PropertyErrorEventArgs.cs" />
+    <Compile Include="ViewModelSupport\RelayCommand.cs" />
+    <Compile Include="ViewModelSupport\SelectedRowChangedEventArgs.cs" />
+    <Compile Include="ViewModelSupport\SelectedRowChangingEventArgs.cs" />
+    <Compile Include="ViewModelSupport\TypedViewModelBase.cs" />
+    <Compile Include="ViewModelSupport\ValidationViewModelBase.cs" />
+    <Compile Include="ViewModelSupport\Validator.cs" />
+    <Compile Include="ViewModelSupport\ViewModelBase.cs" />
+    <Compile Include="ViewModelSupport\ViewModelCore.cs" />
+    <Compile Include="XAML\%28Internal%29\InputTextBoxWindow.xaml.cs">
+      <DependentUpon>InputTextBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XAML\%28Internal%29\SplitHandler.cs" />
+    <Compile Include="XAML\%28Internal%29\UIUtility.cs" />
+    <Compile Include="XAML\Behaviors\BehaviorBinding.cs" />
+    <Compile Include="XAML\Behaviors\CommandBehavior.cs" />
+    <Compile Include="XAML\Behaviors\CommandBehaviorBinding.cs" />
+    <Compile Include="XAML\Behaviors\CommandBehaviorCollection.cs" />
+    <Compile Include="XAML\Behaviors\FocusBehaviour.cs" />
+    <Compile Include="XAML\Behaviors\Internal\EventHandlerGenerator.cs" />
+    <Compile Include="XAML\Behaviors\Internal\ExecutionStrategy.cs" />
+    <None Include="XAML\BindableMultiSelection.cs" />
+    <Compile Include="XAML\Controls\EnhancedDataGrid.cs" />
+    <Compile Include="XAML\Controls\ExceptionGallery.cs" />
+    <Compile Include="XAML\Controls\IEnhancedDataGridColumn.cs" />
+    <Compile Include="XAML\Controls\InputTextBox.cs" />
+    <Compile Include="XAML\Converter\BoolInverterConverter.cs" />
+    <Compile Include="XAML\Converter\BoolToItalicConverter.cs" />
+    <Compile Include="XAML\Converter\BoolToStyleConverter.cs" />
+    <Compile Include="XAML\Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="XAML\Converter\BoolToVisibilityHiddenConverter.cs" />
+    <Compile Include="XAML\Converter\EnumDescriptionConverter.cs" />
+    <Compile Include="XAML\Converter\ErrorContentsConverter.cs" />
+    <Compile Include="XAML\Converter\FullExceptionMessageTextConverter.cs" />
+    <Compile Include="XAML\Converter\GetStatustextFromCategoryConverter.cs" />
+    <Compile Include="XAML\Converter\IsNotNullConverter.cs" />
+    <Compile Include="XAML\Converter\IsNullConverter.cs" />
+    <Compile Include="XAML\Converter\NegateValueConverter.cs" />
+    <Compile Include="XAML\Converter\ObjectTypeConverter.cs" />
+    <Compile Include="XAML\Converter\SortAscendingConverter.cs" />
+    <Compile Include="XAML\Converter\ValueConverterGroup.cs" />
+    <Compile Include="XAML\Converter\ValueEqualsConverter.cs" />
+    <Compile Include="XAML\DataBinder.cs" />
+    <Compile Include="XAML\EnumerationMarkupExtension.cs" />
+    <Compile Include="XAML\GridLengthAnimation.cs" />
+    <Compile Include="XAML\GridSplitterSaver.cs" />
+    <Compile Include="XAML\GridViewSort.cs" />
+    <Compile Include="XAML\ListViewExtensions.cs" />
+    <Compile Include="XAML\PowerUp.cs" />
+    <Compile Include="XAML\Ribbon\RibbonButtonViewModel.cs" />
+    <Compile Include="XAML\Ribbon\RibbonCheckBoxViewModel.cs" />
+    <Compile Include="XAML\Ribbon\RibbonContextualTabViewModel.cs" />
+    <Compile Include="XAML\Ribbon\RibbonItemBase.cs" />
+    <Compile Include="XAML\Ribbon\RibbonTabGroupViewModel.cs" />
+    <Compile Include="XAML\Ribbon\RibbonTabViewModel.cs" />
+    <Compile Include="XAML\Ribbon\RibbonViewModel.cs" />
+    <Compile Include="XAML\SelectTextOnFocus.cs" />
+    <Compile Include="XAML\TreeViewExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ViewModelSupport\ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlClient\readme.txt" />
+    <Content Include="XAML\readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.ComponentModel.DataAnnotations.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\WindowsBase.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextBoxWindow.g.cs" />
+    <Compile Include="C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,179 @@
+﻿<!-- ==========================================================================
+ * WpfHelper: Sammlung von Hilfsfunktionen und Klassen zur Verwendung mit WPF
+ * 
+ * $Rev: 38 $
+ * $Id: InputFilenameDefaultStyle.xaml 38 2010-03-15 15:57:59Z  $
+ * 
+ * (C) 2009-2012 ICEP GmbH, T. Hesse
+ * ========================================================================== -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:WPFCore.XAML.Converter"
+                    xmlns:local="clr-namespace:WPFCore.XAML.Controls">
+
+    <!-- Farben für ListBox =========================================== -->
+    <SolidColorBrush x:Key="HoverBorderBrush_Outer" Color="#B8D6FB" />
+    <SolidColorBrush x:Key="HoverBorderBrush_Inner" Color="#FCFDFE" />
+    <LinearGradientBrush x:Key="HoverBackgroundBrush"
+                         StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#FAFBFD" Offset="0" />
+        <GradientStop Color="#EBF3FD" Offset="1" />
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="SelectedBorderBrush_Outer" Color="#7DA2CE" />
+    <SolidColorBrush x:Key="SelectedBorderBrush_Inner" Color="#EBF3FD" />
+    <SolidColorBrush x:Key="SelectedForegroundBrush" Color="Black" />
+    <LinearGradientBrush x:Key="SelectedBackgroundBrush"
+                         StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#DCEBFC" Offset="0" />
+        <GradientStop Color="#C1DBFC" Offset="1" />
+    </LinearGradientBrush>
+
+    <!-- ListBoxItem ================================================== -->
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="AlternateListBoxItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border Name="Border"
+                            BorderThickness="1" CornerRadius="3"
+                            SnapsToDevicePixels="True">
+                        <Border Name="InnerBorder"
+                                BorderThickness="1" CornerRadius="2"
+                                SnapsToDevicePixels="True"
+                                Padding="1">
+                            <ContentPresenter />
+                        </Border>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush"
+                                    Value="{StaticResource HoverBorderBrush_Outer}" />
+                            <Setter TargetName="InnerBorder" Property="BorderBrush"
+                                    Value="{StaticResource HoverBorderBrush_Inner}" />
+                            <Setter TargetName="InnerBorder" Property="Background"
+                                    Value="{StaticResource HoverBackgroundBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="InnerBorder" Property="Background"
+                                    Value="{StaticResource SelectedBackgroundBrush}" />
+                            <Setter TargetName="InnerBorder" Property="TextBlock.Foreground"
+                                    Value="{StaticResource SelectedForegroundBrush}" />
+                            <Setter TargetName="Border" Property="BorderBrush"
+                                    Value="{StaticResource SelectedBorderBrush_Outer}" />
+                            <Setter TargetName="InnerBorder" Property="BorderBrush"
+                                    Value="{StaticResource SelectedBorderBrush_Inner}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <converter:ObjectTypeConverter x:Key="ObjectType" />
+    <Style TargetType="{x:Type local:ExceptionGallery}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ExceptionGallery}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Content="Exception list" />
+
+                        <!-- Flache Liste der Exception-Hierarchie -->
+                        <ListBox Grid.Row="1"
+                                 ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent},Path=FlatExceptionList}"
+                                 SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedException}"
+                                 IsSynchronizedWithCurrentItem="True"
+                                 ItemContainerStyle="{StaticResource AlternateListBoxItem}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource ObjectType}}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <GridSplitter Grid.Row="2"
+                                      Height="5"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Center" />
+
+                        <Label Grid.Row="3" Content="Message text" />
+
+                        <!-- Details zur aktuellen Exception -->
+                        <Border Grid.Row="4"
+                                DataContext="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedException}">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Border Grid.Row="0"
+                                        BorderThickness="1"
+                                        BorderBrush="#FF828790"
+                                        Margin="0,3">
+                                    <Border BorderThickness="1"
+                                            BorderBrush="White"
+                                            Padding="2">
+                                        <TextBox Text="{Binding Path=Message, Mode=OneWay}"
+                                                 MinHeight="50"
+                                                 IsReadOnly="True"
+                                                 TextWrapping="Wrap"
+                                                 ScrollViewer.VerticalScrollBarVisibility="Visible" />
+                                    </Border>
+                                </Border>
+
+                                <TabControl Grid.Row="1">
+                                    <TabItem Header="Stack">
+                                        <TextBox Text="{Binding Path=StackTrace, Mode=OneWay}"
+                                                 IsReadOnly="True"
+                                                 TextWrapping="Wrap"
+                                                 ScrollViewer.VerticalScrollBarVisibility="Visible" />
+                                    </TabItem>
+                                    <TabItem Header="Source">
+                                        <TextBox Text="{Binding Path=Source, Mode=OneWay}"
+                                                 IsReadOnly="True"
+                                                 TextWrapping="Wrap" />
+                                    </TabItem>
+                                    <TabItem Header="Data">
+                                        <ListView ItemsSource="{Binding Path=Data}">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridView.Columns>
+                                                        <GridViewColumn Header="Key"
+                                                                        DisplayMemberBinding="{Binding Path=Key}" />
+                                                        <GridViewColumn Header="Value"
+                                                                        DisplayMemberBinding="{Binding Path=Value}" />
+                                                    </GridView.Columns>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </TabItem>
+                                </TabControl>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="5">
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="PART_MovePrev" Content="&lt;&lt;" />
+                                <Button x:Name="PART_MoveNext" Content="&gt;&gt;" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

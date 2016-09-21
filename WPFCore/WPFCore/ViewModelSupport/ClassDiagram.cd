@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AMRisk.ViewModelSupport.ViewModelCore">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModelSupport\ViewModelCore.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AMRisk.ViewModelSupport.ViewModelBase">
+    <Position X="3" Y="0.5" Width="2.5" />
+    <Members>
+      <Field Name="dontTraceMe" Hidden="true" />
+      <Field Name="hasChanges" Hidden="true" />
+      <Field Name="initCount" Hidden="true" />
+      <Field Name="isInitialized" Hidden="true" />
+      <Field Name="isInitializing" Hidden="true" />
+      <Field Name="lockObj" Hidden="true" />
+      <Field Name="MyDispatcher" Hidden="true" />
+      <Field Name="PropertiesDoNotAffectChangesFlag" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAGAAAAChAAOAAIAAAAQABgGIEAAAMCAIADAIAUgw=</HashCode>
+      <FileName>ViewModelSupport\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AMRisk.ViewModelSupport.ValidationViewModelBase">
+    <Position X="6.5" Y="2.75" Width="2.75" />
+    <Members>
+      <Field Name="instanceValidators" Hidden="true" />
+      <Field Name="isValid" Hidden="true" />
+      <Field Name="propertyGetters" Hidden="true" />
+      <Field Name="validationExceptionCount" Hidden="true" />
+      <Field Name="validators" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAEACQAACAogAAAoAIAAAAACAAgAAAAABEQ=</HashCode>
+      <FileName>ViewModelSupport\ValidationViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AMRisk.ViewModelSupport.TypedViewModelBase&lt;T&gt;">
+    <Position X="6.5" Y="1" Width="2.75" />
+    <Members>
+      <Field Name="BaseElement" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModelSupport\TypedViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AMRisk.ViewModelSupport.CollectionViewModelBase&lt;T&gt;">
+    <Position X="10.25" Y="0.5" Width="2.75" />
+    <Members>
+      <Field Name="collectionViewSource" Hidden="true" />
+      <Field Name="ignoreCurrentChange" Hidden="true" />
+      <Field Name="nativeRows" Hidden="true" />
+      <Field Name="observableCollection" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>CAIAAAAAAgBQEEgAEABghEQAkBAIABAACAQgQABQAAA=</HashCode>
+      <FileName>ViewModelSupport\CollectionViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AMRisk.ViewModelSupport.RelayCommand">
+    <Position X="0.5" Y="2.75" Width="2.25" />
+    <Members>
+      <Field Name="canExecute" Hidden="true" />
+      <Field Name="execute" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAEAEAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModelSupport\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AMRisk.ViewModelSupport.RelayCommand&lt;T&gt;">
+    <Position X="0.5" Y="5" Width="2.25" />
+    <Members>
+      <Field Name="canExecute" Hidden="true" />
+      <Field Name="execute" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAEAEAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModelSupport\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Delegate Name="AMRisk.ViewModelSupport.HasChangedEventHandler" Collapsed="true">
+    <Position X="3.25" Y="6.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>ViewModelSupport\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

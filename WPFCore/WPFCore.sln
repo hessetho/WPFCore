@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFCoreTest", "WPFCoreTest\WPFCoreTest.csproj", "{ACCE6FE8-2CE4-4EB4-BF87-37BC007F189C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFCore", "WPFCore\WPFCore.csproj", "{7083B616-F553-4F74-84B6-E1BE0F79F8F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFCore.Security", "WPFCore.Security\WPFCore.Security.csproj", "{FD407DFD-C45C-4C78-9A00-939543FCB2BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACCE6FE8-2CE4-4EB4-BF87-37BC007F189C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACCE6FE8-2CE4-4EB4-BF87-37BC007F189C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACCE6FE8-2CE4-4EB4-BF87-37BC007F189C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACCE6FE8-2CE4-4EB4-BF87-37BC007F189C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7083B616-F553-4F74-84B6-E1BE0F79F8F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7083B616-F553-4F74-84B6-E1BE0F79F8F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7083B616-F553-4F74-84B6-E1BE0F79F8F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7083B616-F553-4F74-84B6-E1BE0F79F8F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD407DFD-C45C-4C78-9A00-939543FCB2BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD407DFD-C45C-4C78-9A00-939543FCB2BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD407DFD-C45C-4C78-9A00-939543FCB2BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD407DFD-C45C-4C78-9A00-939543FCB2BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

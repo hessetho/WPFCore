@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:WPFCore.XAML.Converter">
+    
+    <converter:ErrorContentsConverter x:Key="ErrorContents"/>
+
+    <ControlTemplate x:Key="ValidationTemplate">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Left" 
+                       Foreground="Red"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       FontFamily="Webdings"
+                       ToolTip="{Binding Path=/ErrorContent}"
+                       Text="i"/>
+            <!--ToolTip="{Binding ElementName=adornedElement, Path=(Validation.Errors), Converter={StaticResource ErrorContents}}"-->
+            <AdornedElementPlaceholder x:Name="adornedElement"/>
+        </DockPanel>
+    </ControlTemplate>
+
+    <Style TargetType="TextBox" x:Key="ValidatingTextBox">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                <Setter Property="Background" Value="Red"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
+
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationTemplate}"/>
+    </Style>
+
+</ResourceDictionary>
