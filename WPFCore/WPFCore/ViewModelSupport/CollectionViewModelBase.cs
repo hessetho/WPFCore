@@ -53,12 +53,17 @@ namespace WPFCore.ViewModelSupport
         private bool ignoreCurrentChange;
 
         /// <summary>
+        /// Is raised when a refresh of the collection's presentation is suggested (i.e. due to change of filter relevant data)
+        /// </summary>
+        public event EventHandler SuggestRefresh;
+
+        /// <summary>
         ///     Constructor.
         /// </summary>
         /// <remarks>
         ///     The constructor asserts that the object is instantiated on the application's main thread.
         /// </remarks>
-        public CollectionViewModelBase()
+        protected CollectionViewModelBase()
         {
 //#if DEBUG
 //            if (Application.Current.Dispatcher != MyDispatcher)
@@ -332,7 +337,12 @@ namespace WPFCore.ViewModelSupport
         /// </summary>
         public void Refresh()
         {
-            InvokeOnAppDispatcher(() => { this.collectionViewSource.View.Refresh(); });
+            InvokeOnAppDispatcher(() =>
+            {
+                this.collectionViewSource.View.Refresh();
+                if (this.SuggestRefresh != null)
+                    this.SuggestRefresh(this, new EventArgs());
+            });
         }
 
         /// <summary>

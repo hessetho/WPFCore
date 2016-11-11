@@ -1,0 +1,6 @@
+*.lref
+WPFCore/WPFCore/obj/Debug/XAML/(Internal)/InputTextBoxWindow.g.cs
+WPFCore/WPFCore/obj/Debug/XAML/(Internal)/InputTextBoxWindow.g.i.cs
+*.cache
+WPFCore/WPFCore/obj/Debug/GeneratedInternalTypeHelper.g.cs
+WPFCore/WPFCore/obj/Debug/GeneratedInternalTypeHelper.g.cs

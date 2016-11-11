@@ -7,6 +7,15 @@ namespace WPFCore.Data
 {
     public static class DbDataReaderExtensions
     {
+        public static bool ContainsColumn(this DbDataReader reader, string columnName)
+        {
+            for (int idx = 0; idx < reader.FieldCount; idx++)
+                if (reader.GetName(idx) == columnName)
+                    return true;
+
+            return false;
+        }
+
         public static object GetObjectNullable(this DbDataReader reader, int index)
         {
             if (reader.IsDBNull(index))

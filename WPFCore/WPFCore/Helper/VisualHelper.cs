@@ -7,7 +7,7 @@ namespace WPFCore.Helper
     public static class VisualHelper
     {
         /// <summary>
-        /// Traverse the visual tree of an <c>element</c> to find a child of type <c>type</c>
+        ///     Traverse the visual tree of an <c>element</c> to find a child of type <c>type</c>
         /// </summary>
         /// <param name="element"></param>
         /// <param name="type"></param>
@@ -21,9 +21,9 @@ namespace WPFCore.Helper
             if (element is FrameworkElement)
                 (element as FrameworkElement).ApplyTemplate();
 
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+            for (var i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
             {
-                Visual visual = VisualTreeHelper.GetChild(element, i) as Visual;
+                var visual = VisualTreeHelper.GetChild(element, i) as Visual;
                 if (visual.GetType() == type) return visual;
 
                 foundElement = GetDescendantByType(visual, type);
@@ -34,26 +34,27 @@ namespace WPFCore.Helper
         }
 
         /// <summary>
-        /// Traverse the visual tree of an <c>element</c> to find a child of type <c>&gt;T%lt;</c>
+        ///     Traverse the visual tree of an <c>element</c> to find a child of type <c>&gt;T%lt;</c>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="element">The element.</param>
         /// <returns></returns>
         public static T GetDescendant<T>(Visual element) where T : Visual
         {
-            var type = typeof(T);
+            var type = typeof (T);
             if (element == null) return default(T);
 
-            T foundElement = default(T);
-            if (element is FrameworkElement)
-                (element as FrameworkElement).ApplyTemplate();
+            var foundElement = default(T);
+            var frameworkElement = element as FrameworkElement;
+            if (frameworkElement != null)
+                frameworkElement.ApplyTemplate();
 
-            if (element.GetType() == type) return (T)element;
+            if (element.GetType() == type) return (T) element;
 
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+            for (var i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
             {
                 var visual = VisualTreeHelper.GetChild(element, i) as Visual;
-                if (visual.GetType() == type) return (T)visual;
+                if (visual != null && visual.GetType() == type) return (T) visual;
 
                 foundElement = GetDescendant<T>(visual);
                 if (foundElement != null)
@@ -64,7 +65,8 @@ namespace WPFCore.Helper
         }
 
         /// <summary>
-        /// Traverse the visual tree of an <c>element</c> to find a child of name <param name="name"/>
+        ///     Traverse the visual tree of an <c>element</c> to find a child of name
+        ///     <param name="name" />
         /// </summary>
         /// <param name="element"></param>
         /// <param name="name">Name of the child element</param>
@@ -77,11 +79,11 @@ namespace WPFCore.Helper
             if (element is FrameworkElement)
                 (element as FrameworkElement).ApplyTemplate();
 
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+            for (var i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
             {
                 var child = VisualTreeHelper.GetChild(element, i);
                 if (child is FrameworkElement)
-                    if (((FrameworkElement)child).Name == name) return (FrameworkElement)child;
+                    if (((FrameworkElement) child).Name == name) return (FrameworkElement) child;
 
                 foundElement = GetDescendantByName(child, name);
                 if (foundElement != null)
@@ -128,32 +130,28 @@ namespace WPFCore.Helper
 
             var parent = VisualTreeHelper.GetParent(element) as Visual;
             if (parent != null) ClimbTheTree(parent);
-
         }
 
         public static T FindParent<T>(FrameworkElement element) where T : FrameworkElement
         {
-            FrameworkElement parent = LogicalTreeHelper.GetParent(element) as FrameworkElement;
+            var parent = LogicalTreeHelper.GetParent(element) as FrameworkElement;
 
             while (parent != null)
             {
-                T correctlyTyped = parent as T;
+                var correctlyTyped = parent as T;
                 if (correctlyTyped != null)
                     return correctlyTyped;
-                else
-                    return FindParent<T>(parent);
+                return FindParent<T>(parent);
             }
 
             return null;
         }
 
-
         public static Rect GetRectOfObject(FrameworkElement element)
         {
-            Rect rectangleBounds = new Rect();
+            var rectangleBounds = new Rect();
             rectangleBounds = element.RenderTransform.TransformBounds(new Rect(element.RenderSize));
             return rectangleBounds;
         }
-    
     }
 }

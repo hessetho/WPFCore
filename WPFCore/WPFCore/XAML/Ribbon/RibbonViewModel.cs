@@ -9,7 +9,7 @@ namespace WPFCore.XAML.Ribbon
     {
 
         private readonly ObservableCollection<RibbonTabViewModel> tabs = new ObservableCollection<RibbonTabViewModel>();
-        private readonly ObservableCollection<RibbonContextualTabViewModel> contextualTabs = new ObservableCollection<RibbonContextualTabViewModel>();
+        private readonly ObservableCollection<RibbonContextualTabGroupViewModel> contextualTabs = new ObservableCollection<RibbonContextualTabGroupViewModel>();
         private readonly ObservableCollection<RibbonButtonViewModel> applicationMenuItems = new ObservableCollection<RibbonButtonViewModel>();
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace WPFCore.XAML.Ribbon
         /// <summary>
         /// Gets the contextual tabs.
         /// </summary>
-        public ObservableCollection<RibbonContextualTabViewModel> ContextualTabs
+        public ObservableCollection<RibbonContextualTabGroupViewModel> ContextualTabs
         {
             get { return this.contextualTabs; }
         }

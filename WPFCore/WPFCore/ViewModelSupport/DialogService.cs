@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace WPFCore.ViewModelSupport
@@ -55,6 +56,11 @@ namespace WPFCore.ViewModelSupport
             }
 
             return openDialogCallback(contentControl, title);
+        }
+
+        public static MessageBoxResult MessageBox(string messageBoxText, string caption, MessageBoxButton messageBoxButton, MessageBoxImage icon)
+        {
+            return System.Windows.MessageBox.Show(messageBoxText, caption, messageBoxButton, icon);
         }
     }
 }

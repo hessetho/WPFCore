@@ -18,6 +18,13 @@ namespace WPFCore.XAML.Ribbon
             get { return this.groups; }
         }
 
+        public RibbonTabGroupViewModel AddGroup(string header)
+        {
+            var group = new RibbonTabGroupViewModel(header);
+            this.Groups.Add(group);
+            return group;
+        }
+
         public RibbonTabGroupViewModel AddGroup(RibbonTabGroupViewModel group)
         {
             this.Groups.Add(group);

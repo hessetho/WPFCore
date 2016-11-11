@@ -164,6 +164,7 @@
     <Compile Include="XAML\PowerUp.cs" />
     <Compile Include="XAML\Ribbon\RibbonButtonViewModel.cs" />
     <Compile Include="XAML\Ribbon\RibbonCheckBoxViewModel.cs" />
+    <Compile Include="XAML\Ribbon\RibbonContextualTabGroupViewModel.cs" />
     <Compile Include="XAML\Ribbon\RibbonContextualTabViewModel.cs" />
     <Compile Include="XAML\Ribbon\RibbonItemBase.cs" />
     <Compile Include="XAML\Ribbon\RibbonTabGroupViewModel.cs" />

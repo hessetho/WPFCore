@@ -5,6 +5,11 @@
         <ResourceDictionary Source="Brushes.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+    <Style TargetType="{x:Type ListBoxItem}"
+           x:Key="StretchedContainerStyle" >
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+
     <!-- Window-Style ================================================= -->
     <LinearGradientBrush x:Key="WindowBackground"
                              StartPoint="0,0" EndPoint="0,1">

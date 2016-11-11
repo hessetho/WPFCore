@@ -8,6 +8,16 @@ namespace WPFCore.SqlClient
 {
     public static class SqlDataReaderExtensions
     {
+
+        public static bool ContainsColumn(this SqlDataReader reader, string columnName)
+        {
+            for(int idx = 0; idx<reader.FieldCount; idx++)
+                if (reader.GetName(idx) == columnName)
+                    return true;
+
+            return false;
+        }
+
         public static object GetObjectNullable(this SqlDataReader reader, int index)
         {
             if (reader.IsDBNull(index))

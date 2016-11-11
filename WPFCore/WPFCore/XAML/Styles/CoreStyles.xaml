@@ -3,7 +3,7 @@
 
     <!-- This style will always highlight the selected list box item -->
     <Style TargetType="ListBoxItem"
-               x:Key="HighlightedListBoxItem">
+           x:Key="HighlightedListBoxItem">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Template">
