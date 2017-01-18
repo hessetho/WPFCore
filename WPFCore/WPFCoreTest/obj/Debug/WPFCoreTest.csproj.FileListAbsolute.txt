@@ -31,3 +31,20 @@ C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCoreT
 C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCoreTest\bin\Debug\WPFCore.Security.dll
 C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCoreTest\bin\Debug\WPFCore.Security.pdb
 C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCoreTest\bin\Debug\WPFCore.pdb
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\bin\Debug\WPFCoreTest.exe.config
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest.exe
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest.pdb
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\bin\Debug\WPFCoreTest.exe
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\bin\Debug\WPFCoreTest.pdb
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\bin\Debug\WPFCore.dll
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\bin\Debug\WPFCore.Security.dll
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\bin\Debug\WPFCore.Security.pdb
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\bin\Debug\WPFCore.pdb
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest.csprojResolveAssemblyReference.cache
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\MainWindow.baml
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\MainWindow.g.cs
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\App.g.cs
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest_MarkupCompile.cache
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest.g.resources
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest.Properties.Resources.resources
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest.csproj.GenerateResource.Cache

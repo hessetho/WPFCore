@@ -30,5 +30,31 @@
 
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationTemplate}"/>
     </Style>
+    
+    <Style TargetType="DatePicker" x:Key="ValidatingDatePicker">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                <!--<Setter Property="Background" Value="Red"/>
+                <Setter Property="Foreground" Value="White"/>-->
+            </Trigger>
+        </Style.Triggers>
+
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationTemplate}"/>
+    </Style>
+
+    <Style TargetType="ComboBox" x:Key="ValidatingCombobox">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                <!--<Setter Property="Background" Value="Red"/>
+                <Setter Property="Foreground" Value="White"/>-->
+            </Trigger>
+        </Style.Triggers>
+
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationTemplate}"/>
+    </Style>
 
 </ResourceDictionary>

@@ -60,15 +60,28 @@ namespace WPFCore.SqlClient
         #endregion GetString extensions
 
         #region GetInt32 extensions
+
         public static Int32 GetInt32(this SqlDataReader reader, string columnName)
         {
             var index = reader.GetOrdinal(columnName);
-            return reader.GetInt32(index);
+
+            if (reader.GetDataTypeName(index) == "smallint")
+                return (int) reader.GetInt16(index);
+            else
+                return reader.GetInt32(index);
         }
 
         public static Int32? GetInt32Nullable(this SqlDataReader reader, int index)
         {
-            return GetInt32Nullable(reader, index, null);
+            if (reader.IsDBNull(index))
+                return (int?)null;
+            else
+            {
+                if (reader.GetDataTypeName(index) == "smallint")
+                    return (int)reader.GetInt16(index);
+                else
+                    return reader.GetInt32(index);
+            }
         }
 
         public static Int32? GetInt32Nullable(this SqlDataReader reader, string columnName)
@@ -77,7 +90,7 @@ namespace WPFCore.SqlClient
             return GetInt32Nullable(reader, index);
         }
 
-        public static Int32? GetInt32Nullable(this SqlDataReader reader, int index, Int32? defaultValue)
+        public static Int32 GetInt32(this SqlDataReader reader, int index, Int32 defaultValue)
         {
             if (reader.IsDBNull(index))
                 return defaultValue;
@@ -90,10 +103,10 @@ namespace WPFCore.SqlClient
             }
         }
 
-        public static Int32? GetInt32Nullable(this SqlDataReader reader, string columnName, Int32? defaultValue)
+        public static Int32 GetInt32(this SqlDataReader reader, string columnName, Int32 defaultValue)
         {
             var index = reader.GetOrdinal(columnName);
-            return GetInt32Nullable(reader, index);
+            return GetInt32(reader, index, defaultValue);
         }
         #endregion GetInt32 extensions
 

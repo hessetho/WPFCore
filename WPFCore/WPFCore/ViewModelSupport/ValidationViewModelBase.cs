@@ -126,6 +126,17 @@ namespace WPFCore.ViewModelSupport
             this.OnPropertyChanged("ValidPropertiesCount");
         }
 
+        private readonly List<string> ignoreList = new List<string> { "IsValid", "Error", "IsInitializing", "IsInitialized" };
+
+        protected override void OnPropertyChanged(string propertyName)
+        {
+            // validate this instance first (unless initializing, ignore IsValid itself)
+            if(IsInitialized && !this.ignoreList.Contains(propertyName))
+                this.Validate();
+            // then notify of changes
+            base.OnPropertyChanged(propertyName);
+        }
+
         /// <summary>
         ///     This method is called after a property has been changed (and the <see cref="ViewModelBase.PropertyChanged" />
         ///     event has been triggered). It's purpose is to trigger the object's validation rules by
@@ -150,7 +161,7 @@ namespace WPFCore.ViewModelSupport
         /// <summary>
         ///     Initialize validation flag
         /// </summary>
-        protected void Validate()
+        protected internal void Validate()
         {
             Debug.Assert(this.IsInitializing == false, "WARNING! Validate should NOT be called while IsInitialized is True. Call EndInit() prior.");
 

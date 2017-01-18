@@ -368,6 +368,12 @@ namespace WPFCore.ViewModelSupport
             InvokeOnAppDispatcher(() => this.collectionViewSource.GroupDescriptions.Add(new PropertyGroupDescription(columnName)));
         }
 
+        public void Validate()
+        {
+            if(typeof(T).IsSubclassOf(typeof(ValidationViewModelBase)))
+                foreach (var item in this.Source.Cast<ValidationViewModelBase>())
+                    item.Validate();
+        }
         /// <summary>
         ///     This event handler is triggered before the currently selected row is changed.
         ///     It raises the <see cref="CurrentChanging" /> event, which allows the application

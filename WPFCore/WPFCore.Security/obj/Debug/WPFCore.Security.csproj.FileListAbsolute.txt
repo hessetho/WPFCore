@@ -3,3 +3,8 @@ C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore.
 C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore.Security\obj\Debug\WPFCore.Security.csprojResolveAssemblyReference.cache
 C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore.Security\obj\Debug\WPFCore.Security.dll
 C:\Users\thesse\CloudStation\Sicherungen\Development\VS Sources\WPFCore\WPFCore.Security\obj\Debug\WPFCore.Security.pdb
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore.Security\bin\Debug\WPFCore.Security.dll
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore.Security\bin\Debug\WPFCore.Security.pdb
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore.Security\obj\Debug\WPFCore.Security.csprojResolveAssemblyReference.cache
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore.Security\obj\Debug\WPFCore.Security.dll
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore.Security\obj\Debug\WPFCore.Security.pdb

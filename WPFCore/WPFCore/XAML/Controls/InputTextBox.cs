@@ -47,6 +47,7 @@ namespace WPFCore.XAML.Controls
                 InputText = defaultText,
             };
             inputTextWin.SetValidationFunction(inputValidation);
+            inputTextWin.Title = title;
 
             if (inputTextWin.ShowDialog() == true)
                 return inputTextWin.InputText;

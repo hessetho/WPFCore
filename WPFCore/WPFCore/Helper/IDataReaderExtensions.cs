@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
 using WPFCore.Helper;
 
-namespace WPFCore.Data
+namespace WPFCore.Helper
 {
-    public static class DbDataReaderExtensions
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class IDataReaderExtensions
     {
-        public static bool ContainsColumn(this DbDataReader reader, string columnName)
+        public static bool ContainsColumn(this IDataReader reader, string columnName)
         {
             for (int idx = 0; idx < reader.FieldCount; idx++)
                 if (reader.GetName(idx) == columnName)
@@ -16,7 +20,7 @@ namespace WPFCore.Data
             return false;
         }
 
-        public static object GetObjectNullable(this DbDataReader reader, int index)
+        public static object GetObjectNullable(this IDataReader reader, int index)
         {
             if (reader.IsDBNull(index))
                 return string.Empty;
@@ -25,24 +29,24 @@ namespace WPFCore.Data
         }
 
         #region GetString extensions
-        public static string GetString(this DbDataReader reader, string columnName)
+        public static string GetString(this IDataReader reader, string columnName)
         {
             var index = reader.GetOrdinal(columnName);
             return reader.GetString(index);
         }
 
-        public static string GetStringNullable(this DbDataReader reader, int index)
+        public static string GetStringNullable(this IDataReader reader, int index)
         {
             return GetStringNullable(reader, index, string.Empty);
         }
 
-        public static string GetStringNullable(this DbDataReader reader, string columnName)
+        public static string GetStringNullable(this IDataReader reader, string columnName)
         {
             var index = reader.GetOrdinal(columnName);
             return GetStringNullable(reader, index, string.Empty);
         }
 
-        public static string GetStringNullable(this DbDataReader reader, int index, string defaultText)
+        public static string GetStringNullable(this IDataReader reader, int index, string defaultText)
         {
             if (reader.IsDBNull(index))
                 return defaultText;
@@ -50,7 +54,7 @@ namespace WPFCore.Data
                 return reader.GetString(index);
         }
 
-        public static string GetStringNullable(this DbDataReader reader, string columnName, string defaultText)
+        public static string GetStringNullable(this IDataReader reader, string columnName, string defaultText)
         {
             var index = reader.GetOrdinal(columnName);
             return GetStringNullable(reader, index, defaultText);
@@ -58,63 +62,65 @@ namespace WPFCore.Data
         #endregion GetString extensions
 
         #region GetInt32 extensions
-        public static Int32 GetInt32(this DbDataReader reader, string columnName)
+        public static Int32 GetInt32(this IDataReader reader, string columnName)
         {
             var index = reader.GetOrdinal(columnName);
             return reader.GetInt32(index);
         }
 
-        public static Int32? GetInt32Nullable(this DbDataReader reader, int index)
+        public static Int32? GetInt32Nullable(this IDataReader reader, int index)
         {
-            return GetInt32Nullable(reader, index, null);
+            if (reader.IsDBNull(index))
+                return null;
+            if (reader.GetDataTypeName(index) == "smallint")
+                return (int) reader.GetInt16(index);
+            return reader.GetInt32(index);
         }
 
-        public static Int32? GetInt32Nullable(this DbDataReader reader, string columnName)
+        public static Int32? GetInt32Nullable(this IDataReader reader, string columnName)
         {
             var index = reader.GetOrdinal(columnName);
             return GetInt32Nullable(reader, index);
         }
 
-        public static Int32? GetInt32Nullable(this DbDataReader reader, int index, Int32? defaultValue)
+        public static Int32 GetInt32(this IDataReader reader, int index, Int32 defaultValue)
         {
             if (reader.IsDBNull(index))
                 return defaultValue;
-            else
-            {
-                if (reader.GetDataTypeName(index) == "smallint")
-                    return (int)reader.GetInt16(index);
-                else
-                    return reader.GetInt32(index);
-            }
+
+            if (reader.GetDataTypeName(index) == "smallint")
+                return (int) reader.GetInt16(index);
+
+            return reader.GetInt32(index);
         }
 
-        public static Int32? GetInt32Nullable(this DbDataReader reader, string columnName, Int32? defaultValue)
+        public static Int32 GetInt32(this IDataReader reader, string columnName, Int32 defaultValue)
         {
             var index = reader.GetOrdinal(columnName);
-            return GetInt32Nullable(reader, index);
+            return GetInt32(reader, index, defaultValue);
         }
         #endregion GetInt32 extensions
 
         #region GetDouble extensions
 
-        public static double? GetDouble(this DbDataReader reader, string columnName)
+        public static double? GetDouble(this IDataReader reader, string columnName)
         {
             var index = reader.GetOrdinal(columnName);
             return reader.GetDouble(index);
         }
 
-        public static double? GetDoubleNullable(this DbDataReader reader, int index)
+        public static double? GetDoubleNullable(this IDataReader reader, int index)
         {
             return GetDoubleNullable(reader, index, null);
         }
 
-        public static double? GetDoubleNullable(this DbDataReader reader, string columnName)
+        public static double? GetDoubleNullable(this IDataReader reader, string columnName)
         {
             var index = reader.GetOrdinal(columnName);
             return GetDoubleNullable(reader, index);
         }
 
-        public static double? GetDoubleNullable(this DbDataReader reader, int index, double? defaultValue)
+        public static double? GetDoubleNullable(this IDataReader reader, int index, double? defaultValue)
         {
             try
             {
@@ -133,7 +139,7 @@ namespace WPFCore.Data
             }
         }
 
-        public static double? GetDoubleNullable(this DbDataReader reader, string columnName, double defaultValue)
+        public static double? GetDoubleNullable(this IDataReader reader, string columnName, double defaultValue)
         {
             var index = reader.GetOrdinal(columnName);
             return GetDoubleNullable(reader, index, defaultValue);
@@ -141,7 +147,7 @@ namespace WPFCore.Data
         #endregion GetDouble extensions
 
         #region GetSmallInt extensions
-        public static int? GetSmallIntNullable(this DbDataReader reader, int index)
+        public static int? GetSmallIntNullable(this IDataReader reader, int index)
         {
             try
             {
@@ -161,31 +167,31 @@ namespace WPFCore.Data
 
         #region GetDateTime extensions
 
-        public static DateTime GetDateTime(this DbDataReader reader, string columnName)
+        public static DateTime GetDateTime(this IDataReader reader, string columnName)
         {
             var index = reader.GetOrdinal(columnName);
             return reader.GetDateTime(index);
         }
 
-        public static DateTime? GetDateTimeNullable(this DbDataReader reader, int index)
+        public static DateTime? GetDateTimeNullable(this IDataReader reader, int index)
         {
             return GetDateTimeNullable(reader, index, null);
         }
 
-        public static DateTime? GetDateTimeNullable(this DbDataReader reader, string columnName)
+        public static DateTime? GetDateTimeNullable(this IDataReader reader, string columnName)
         {
             var index = reader.GetOrdinal(columnName);
             return reader.GetDateTimeNullable(index);
         }
 
-        public static DateTime? GetDateTimeNullable(this DbDataReader reader, int index, DateTime? defaultValue)
+        public static DateTime? GetDateTimeNullable(this IDataReader reader, int index, DateTime? defaultValue)
         {
             if (reader.IsDBNull(index))
                 return defaultValue;
             return reader.GetDateTime(index);
         }
 
-        public static DateTime? GetDateTimeNullable(this DbDataReader reader, string columnName, DateTime? defaultValue)
+        public static DateTime? GetDateTimeNullable(this IDataReader reader, string columnName, DateTime? defaultValue)
         {
             var index = reader.GetOrdinal(columnName);
             return GetDateTimeNullable(reader, index, defaultValue);
@@ -195,7 +201,7 @@ namespace WPFCore.Data
 
         #region GetBoolean extensions
 
-        public static bool? GetBooleanNullable(this DbDataReader reader, int index)
+        public static bool? GetBooleanNullable(this IDataReader reader, int index)
         {
             if (reader.IsDBNull(index))
                 return null;
@@ -203,12 +209,24 @@ namespace WPFCore.Data
                 return reader.GetBoolean(index);
         }
 
-        public static bool GetBoolean(this DbDataReader reader, int index, bool defaultValue)
+        public static bool GetBoolean(this IDataReader reader, int index, bool defaultValue)
         {
             if (reader.IsDBNull(index))
                 return defaultValue;
             else
                 return reader.GetBoolean(index);
+        }
+
+        public static bool GetBoolean(this IDataReader reader, string columnName, bool defaultValue)
+        {
+            var index = reader.GetOrdinal(columnName);
+            return GetBoolean(reader, index, defaultValue);
+        }
+
+        public static bool GetBoolean(this IDataReader reader, string columnName)
+        {
+            var index = reader.GetOrdinal(columnName);
+            return reader.GetBoolean(index);
         }
 
         #endregion GetBoolean extensions

@@ -53,6 +53,8 @@
     <Compile Include="DataKiosk\IDataSubscriber.cs" />
     <Compile Include="Data\%28internal%29\PropertyComparer.cs" />
     <Compile Include="Data\%28internal%29\PropertyComparerCollection.cs" />
+    <Compile Include="Data\CalendarAppointment.cs" />
+    <Compile Include="Data\CalendarDay.cs" />
     <Compile Include="Data\DateRange.cs" />
     <Compile Include="Data\DateRanges.cs" />
     <Compile Include="Data\DateRangeType.cs" />
@@ -76,7 +78,7 @@
     <Compile Include="Helper\EnumHelper.cs" />
     <Compile Include="Helper\ExceptionHelper.cs" />
     <Compile Include="Helper\ReflectionHelper.cs" />
-    <Compile Include="Helper\DbDataReaderExtensions.cs" />
+    <Compile Include="Helper\IDataReaderExtensions.cs" />
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Helper\StringValidCharactersAttribute.cs" />
     <Compile Include="Helper\ThreadStarter.cs" />
@@ -107,7 +109,7 @@
     <Compile Include="ViewModelSupport\DialogServiceExt.cs" />
     <Compile Include="ViewModelSupport\DoesNotAffectChangesFlag.cs" />
     <Compile Include="ViewModelSupport\DontTraceMeAttribute.cs" />
-    <Compile Include="ViewModelSupport\HasChangedEventArgs.cs" />
+    <Compile Include="ViewModelSupport\IDialogSupport.cs" />
     <Compile Include="ViewModelSupport\InstanceValidationAttribute.cs" />
     <Compile Include="ViewModelSupport\ITraceInformationProvider.cs" />
     <Compile Include="ViewModelSupport\IValidationExceptionHandler.cs" />
@@ -117,9 +119,10 @@
     <Compile Include="ViewModelSupport\SelectedRowChangingEventArgs.cs" />
     <Compile Include="ViewModelSupport\TypedViewModelBase.cs" />
     <Compile Include="ViewModelSupport\ValidationViewModelBase.cs" />
-    <Compile Include="ViewModelSupport\Validator.cs" />
+    <Compile Include="ViewModelSupport\%28Internal%29\Validator.cs" />
     <Compile Include="ViewModelSupport\ViewModelBase.cs" />
     <Compile Include="ViewModelSupport\ViewModelCore.cs" />
+    <Compile Include="Data\%28internal%29\CalendarAppointmentWrapper.cs" />
     <Compile Include="XAML\%28Internal%29\InputTextBoxWindow.xaml.cs">
       <DependentUpon>InputTextBoxWindow.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,7 @@
     <Compile Include="XAML\Behaviors\Internal\EventHandlerGenerator.cs" />
     <Compile Include="XAML\Behaviors\Internal\ExecutionStrategy.cs" />
     <None Include="XAML\BindableMultiSelection.cs" />
+    <Compile Include="XAML\BindingBridge.cs" />
     <Compile Include="XAML\Controls\DateRangeSelector.cs" />
     <Compile Include="XAML\Controls\EnhancedDataGrid.cs" />
     <Compile Include="XAML\Controls\ExceptionGallery.cs" />
@@ -140,6 +144,7 @@
     <Compile Include="XAML\Controls\IEnhancedDataGridColumn.cs" />
     <Compile Include="XAML\Controls\InputFilename.cs" />
     <Compile Include="XAML\Controls\InputTextBox.cs" />
+    <Compile Include="XAML\Controls\MonthView.cs" />
     <Compile Include="XAML\Converter\BoolInverterConverter.cs" />
     <Compile Include="XAML\Converter\BoolToItalicConverter.cs" />
     <Compile Include="XAML\Converter\BoolToStyleConverter.cs" />
@@ -157,6 +162,10 @@
     <Compile Include="XAML\Converter\ValueConverterGroup.cs" />
     <Compile Include="XAML\Converter\ValueEqualsConverter.cs" />
     <Compile Include="XAML\DataBinder.cs" />
+    <Compile Include="XAML\DragDrop\DragDropManager.cs" />
+    <Compile Include="XAML\DragDrop\DropPreviewAdorner.cs" />
+    <Compile Include="XAML\DragDrop\IDragSourceAdvisor.cs" />
+    <Compile Include="XAML\DragDrop\IDropTargetAdvisor.cs" />
     <Compile Include="XAML\EnumerationMarkupExtension.cs" />
     <Compile Include="XAML\GridLengthAnimation.cs" />
     <Compile Include="XAML\GridViewSort.cs" />
@@ -194,6 +203,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="themes\InputFilenameDefaultStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\MonthViewDefaultStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -96,6 +96,7 @@ E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore_MarkupCompile.lref
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\themes\DateRangeSelectorDefaultStyle.baml
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\themes\ExceptionGalleryDefaultStyle.baml
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\themes\InputFilenameDefaultStyle.baml
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\themes\MonthViewDefaultStyle.baml
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextBoxWindow.baml
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\XAML\Styles\ValidationStyles.baml
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore.g.resources

@@ -6,17 +6,18 @@
         xmlns:xaml="clr-namespace:WPFCore.XAML"
         x:ClassModifier="internal"
         x:Name="WindowInputTextBox"
-        SizeToContent="WidthAndHeight"
+        SizeToContent="Height"
         WindowStartupLocation="CenterScreen"
         WindowStyle="ToolWindow"
         mc:Ignorable="d" 
         ShowInTaskbar="True" 
         xaml:PowerUp.FocusFirst="True"
+        Width="300"
         Title="Input text">
     <Window.Resources>
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,2,40,2" />
+
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
@@ -55,15 +56,13 @@
 
         <TextBlock Grid.Row="0"
                    TextWrapping="Wrap"
-                   Width="250"
                    Text="{Binding ElementName=WindowInputTextBox, 
                                   Path=MessageText,     
                                   FallbackValue='Please enter a text:'
                          }"/>
         
         <TextBox Grid.Row="1"
-                 Margin="0,5,20,0"
-                 Width="250"
+                 Margin="0,5"
                  xaml:PowerUp.SelectTextOnFocus="True"
                  Text="{Binding ElementName=WindowInputTextBox, 
                                 Path=InputText,
@@ -72,20 +71,21 @@
                                 NotifyOnValidationError=true}"/>
         
         <DockPanel Grid.Row="2"
-                   LastChildFill="False">
-            <Button DockPanel.Dock="Right"
-                    IsCancel="True"
-                    Width="60"
-                    Margin="5,2"
-                    Content="Cancel" 
-                    Click="CancelClicked" />
-            <Button DockPanel.Dock="Right"
+                   LastChildFill="False"
+                   Margin="0,5,0,0">
+            
+            <Button DockPanel.Dock="Left"
                     x:Name="OkayButton"
                     IsDefault="True"
                     Width="45"
-                    Margin="5,2"
                     Content="Ok"
                     Click="OkayClicked"/>
+
+            <Button DockPanel.Dock="Right"
+                    IsCancel="True"
+                    Width="60"
+                    Content="Cancel" 
+                    Click="CancelClicked" />
         </DockPanel>
     </Grid>
 </Window>
