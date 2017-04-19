@@ -10,6 +10,8 @@ namespace WPFCore.Data.Performance
         private string itemName;
         private DateTime? startTime;
 
+        public event EventHandler<PerformanceItem> Stopped;
+
         public PerformanceItem()
         {
         }
@@ -124,6 +126,8 @@ namespace WPFCore.Data.Performance
             this.Add(DateTime.Now - this.startTime.Value);
 
             this.startTime = null;
+
+            this.Stopped?.Invoke(this, this);
         }
 
         public TimeSpan GetCurrentTiming()

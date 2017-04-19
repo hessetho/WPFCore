@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media;
 using System.Windows.Input;
 using WPFCore.ViewModelSupport;
 using WPFCore.XAML.Controls;
@@ -31,6 +32,10 @@ namespace WPFCore.Data
         {
             get { return this.originalAppointment.Tag; }
         }
+
+        public Brush BorderBrush { get { return this.originalAppointment.BorderBrush; } }
+
+        public Brush Background { get { return this.originalAppointment.Background; } }
 
         #region Commands
 

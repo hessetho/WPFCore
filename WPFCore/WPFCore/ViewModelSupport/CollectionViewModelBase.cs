@@ -51,6 +51,7 @@ namespace WPFCore.ViewModelSupport
         ///     Used internally only.
         /// </summary>
         private bool ignoreCurrentChange;
+        private bool isValid;
 
         /// <summary>
         /// Is raised when a refresh of the collection's presentation is suggested (i.e. due to change of filter relevant data)
@@ -291,6 +292,8 @@ namespace WPFCore.ViewModelSupport
         {
             if (this.ItemChanged != null)
                 this.ItemChanged(this, (T)sender);
+
+            this.SetChangeFlag();
         }
 
         /// <summary>
@@ -368,12 +371,39 @@ namespace WPFCore.ViewModelSupport
             InvokeOnAppDispatcher(() => this.collectionViewSource.GroupDescriptions.Add(new PropertyGroupDescription(columnName)));
         }
 
+        /// <summary>
+        /// Validates this instance by validating each contained item.
+        /// </summary>
         public void Validate()
         {
-            if(typeof(T).IsSubclassOf(typeof(ValidationViewModelBase)))
+            if (typeof(T).IsSubclassOf(typeof(ValidationViewModelBase)))
+            {
                 foreach (var item in this.Source.Cast<ValidationViewModelBase>())
                     item.Validate();
+
+                this.IsValid = !this.Source.Cast<ValidationViewModelBase>().Any(itm => itm.IsValid == false);
+            }
         }
+
+        /// <summary>
+        /// Indicates, whether this instance has validated content.
+        /// </summary>
+        /// <value>
+        /// It is always <c>true</c>, if this is not a validating collection.
+        /// </value>
+        [DoesNotAffectChangesFlag]
+        public bool IsValid
+        {
+            get { return this.isValid; }
+            private set
+            {
+                if (value == this.isValid) return;
+
+                this.isValid = value;
+                base.OnPropertyChanged("IsValid");
+            }
+        }
+
         /// <summary>
         ///     This event handler is triggered before the currently selected row is changed.
         ///     It raises the <see cref="CurrentChanging" /> event, which allows the application

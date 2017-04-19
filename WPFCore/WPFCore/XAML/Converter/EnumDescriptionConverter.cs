@@ -23,9 +23,11 @@ namespace WPFCore.XAML.Converter
 
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null || (value is string && string.IsNullOrEmpty((string)value)))
+                return string.Empty;
+
             var myEnum = (Enum)value;
-            var description = this.GetEnumDescription(myEnum);
-            return description;
+            return this.GetEnumDescription(myEnum);
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

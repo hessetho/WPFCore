@@ -12,6 +12,18 @@ using WPFCore.ViewModelSupport;
 
 namespace WPFCore.XAML.Controls
 {
+    public class MonthChangedEventArgs
+    {
+        public MonthChangedEventArgs(int month, int year)
+        {
+            this.Month = month;
+            this.Year = year;
+        }
+
+        public int Month { get; private set; }
+        public int Year { get; private set; }
+    }
+
     [TemplatePart(Name = "PART_DayNames", Type = typeof (Grid))]
     [TemplatePart(Name = "PART_DaysGrid", Type = typeof (Grid))]
     [TemplatePart(Name = "PART_PrevMonthButton", Type = typeof (Button))]
@@ -19,6 +31,8 @@ namespace WPFCore.XAML.Controls
     [TemplatePart(Name = "PART_AppointmentList", Type = typeof (ItemsControl))]
     public class MonthView : Control
     {
+        public delegate void MonthChangedEventHandler(object sender, MonthChangedEventArgs e);
+
         private readonly Dictionary<DateTime, CalendarDay> displayedDays = new Dictionary<DateTime, CalendarDay>();
         private ICommand commandClickedADay;
         private ICommand commandSelectedADay;
@@ -89,6 +103,7 @@ namespace WPFCore.XAML.Controls
             set { SetValue(AppointmentBoxTemplateProperty, value); }
         }
 
+        public event MonthChangedEventHandler MonthChanged;
         public event EventHandler<CalendarDay> DayDoubleClicked;
         public event EventHandler<CalendarAppointment> AppointmentDoubleClicked;
 
@@ -105,7 +120,7 @@ namespace WPFCore.XAML.Controls
             this.nextMonthButton = GetTemplateChild("PART_NextMonthButton") as Button;
 
             this.DayBoxTemplate = FindResource("DayDefaultTemplate") as DataTemplate;
-            //this.AppointmentBoxTemplate = FindResource("AppointmentDefaultTemplate") as DataTemplate;
+            this.AppointmentBoxTemplate = FindResource("AppointmentDefaultTemplate") as DataTemplate;
 
             if (this.prevMonthButton != null)
                 this.prevMonthButton.Click += this.PreviousMonthClicked;
@@ -158,15 +173,15 @@ namespace WPFCore.XAML.Controls
             }
         }
 
-        public static DependencyProperty AppointmentBoxTemplateProperty =
-            DependencyProperty.Register("AppointmentBoxTemplate", typeof (DataTemplate), typeof (MonthView),
-                new PropertyMetadata(OnAppointmentBoxTemplateChanged));
-
         private static void OnAppointmentBoxTemplateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var monthView = (MonthView) d;
             monthView.BuildMonthView();
         }
+
+        public static DependencyProperty AppointmentBoxTemplateProperty =
+            DependencyProperty.Register("AppointmentBoxTemplate", typeof (DataTemplate), typeof (MonthView),
+                new PropertyMetadata(OnAppointmentBoxTemplateChanged));
 
         public static DependencyProperty CurrentMonthProperty =
             DependencyProperty.Register("CurrentMonth", typeof (int), typeof (MonthView));
@@ -250,7 +265,10 @@ namespace WPFCore.XAML.Controls
             for (var idx = 0; idx < 6 - col; idx++)
                 this.AddDayToGrid(nextDate.AddDays(idx), row, col + idx + 1, false);
 
-            // Die Termine ergänzen
+            // Die Termine ergänzen, diese dazu ggf. erst befüllen lassen
+            if(this.MonthChanged!=null)
+                this.MonthChanged(this, new MonthChangedEventArgs(this.CurrentMonth, this.CurrentYear));
+
             this.ApplyAppointments();
         }
 
@@ -370,6 +388,11 @@ namespace WPFCore.XAML.Controls
 
         #region Verwaltung der Termine
 
+        /// <summary>
+        /// Ereignisbehandlung, tritt ein, wenn eine andere Terminliste angehängt wird
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
         private static void OnAppointmentsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var monthView = (MonthView) d;
@@ -389,6 +412,11 @@ namespace WPFCore.XAML.Controls
             monthView.ApplyAppointments();
         }
 
+        /// <summary>
+        /// Ereignisbehandlung, tritt ein, wenn die Terminliste verändert wurde
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnAppointmentCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)

@@ -47,6 +47,11 @@ namespace WPFCore.Data
             get { return this.date.DayOfWeek == DayOfWeek.Sunday || this.date.DayOfWeek == DayOfWeek.Saturday; }
         }
 
+        public bool IsToday
+        {
+            get { return this.date == DateTime.Today; }
+        }
+
         public bool BelongsToCurrentMonth
         {
             get { return this.belongsToCurrentMonth; }

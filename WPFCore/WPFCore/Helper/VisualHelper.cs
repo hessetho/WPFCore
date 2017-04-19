@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
@@ -152,6 +153,24 @@ namespace WPFCore.Helper
             var rectangleBounds = new Rect();
             rectangleBounds = element.RenderTransform.TransformBounds(new Rect(element.RenderSize));
             return rectangleBounds;
+        }
+
+        public static List<Visual> EnumVisualTree(Visual vElementRoot)
+        {
+            var result = new List<Visual>();
+
+            for (int intCounter = 0; intCounter < VisualTreeHelper.GetChildrenCount(vElementRoot); intCounter++)
+            {
+                //Get the control
+                Visual child = (Visual)VisualTreeHelper.GetChild(vElementRoot, intCounter);
+                //Add it to the list
+                result.Add(child);
+
+                //Process all children
+                result.AddRange(EnumVisualTree(child));
+            }
+
+            return result;
         }
     }
 }

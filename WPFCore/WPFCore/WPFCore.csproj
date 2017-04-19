@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppContext.cs" />
+    <Compile Include="ComponentModel\IUserFriendly.cs" />
+    <Compile Include="ComponentModel\SelectableItemsList.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DataKiosk\DataKiosk.cs" />
     <Compile Include="DataKiosk\DataPublishedEventArgs.cs" />
@@ -60,15 +62,31 @@
     <Compile Include="Data\DateRangeType.cs" />
     <Compile Include="Data\DateRangeTypes.cs" />
     <Compile Include="Data\DayGroupEnum.cs" />
+    <Compile Include="Data\FlexData\FlexColumnDefinition.cs" />
+    <Compile Include="Data\FlexData\ColumnPropertyDescriptor.cs" />
+    <Compile Include="Data\FlexData\FlexRow.cs" />
+    <Compile Include="Data\FlexData\FlexTable.cs" />
+    <Compile Include="Data\FlexData\ProxyProperty.cs" />
+    <Compile Include="Data\Holiday.cs" />
+    <Compile Include="ComponentModel\ISelectable.cs" />
     <Compile Include="Data\MRUCollection.cs" />
+    <Compile Include="Data\NestedEvaluation\AndOperator.cs" />
+    <Compile Include="Data\NestedEvaluation\ComparisonOperator.cs" />
+    <Compile Include="Data\NestedEvaluation\ConstantValue.cs" />
+    <Compile Include="Data\NestedEvaluation\IBooleanNode.cs" />
+    <Compile Include="Data\NestedEvaluation\IEvaluationNode.cs" />
+    <Compile Include="Data\NestedEvaluation\OrOperator.cs" />
     <Compile Include="Data\Performance\CategoryDictionary.cs" />
     <Compile Include="Data\Performance\PerformanceCenter.cs" />
     <Compile Include="Data\Performance\PerformanceCollector.cs" />
     <Compile Include="Data\Performance\PerformanceItem.cs" />
+    <Compile Include="ComponentModel\Selectable.cs" />
     <Compile Include="Data\SerializableDictionary.cs" />
     <Compile Include="Data\SortableList.cs" />
     <Compile Include="Data\%28internal%29\ValidateDateRangeAttribute.cs" />
     <Compile Include="Delegates.cs" />
+    <Compile Include="Helper\ConfigurationStringHelper.cs" />
+    <Compile Include="Helper\Cryptor.cs" />
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="Helper\DateTimeExtensions.cs" />
     <Compile Include="Helper\DiagnosticsHelper.cs" />
@@ -77,6 +95,9 @@
     <Compile Include="Helper\EnumerableHelper.cs" />
     <Compile Include="Helper\EnumHelper.cs" />
     <Compile Include="Helper\ExceptionHelper.cs" />
+    <Compile Include="Helper\HolidayHelper.cs" />
+    <Compile Include="Helper\IsConfigurationParameterAttribute.cs" />
+    <Compile Include="Helper\NumberHelper.cs" />
     <Compile Include="Helper\ReflectionHelper.cs" />
     <Compile Include="Helper\IDataReaderExtensions.cs" />
     <Compile Include="Helper\StringHelper.cs" />
@@ -148,8 +169,10 @@
     <Compile Include="XAML\Converter\BoolInverterConverter.cs" />
     <Compile Include="XAML\Converter\BoolToItalicConverter.cs" />
     <Compile Include="XAML\Converter\BoolToStyleConverter.cs" />
+    <Compile Include="XAML\Converter\BoolToTextConverter.cs" />
     <Compile Include="XAML\Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="XAML\Converter\BoolToVisibilityHiddenConverter.cs" />
+    <Compile Include="XAML\Converter\DebugConverter.cs" />
     <Compile Include="XAML\Converter\EnumDescriptionConverter.cs" />
     <Compile Include="XAML\Converter\ErrorContentsConverter.cs" />
     <Compile Include="XAML\Converter\FullExceptionMessageTextConverter.cs" />
@@ -239,6 +262,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
