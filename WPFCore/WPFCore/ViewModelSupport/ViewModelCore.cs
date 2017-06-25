@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace WPFCore.ViewModelSupport
 {
@@ -30,7 +31,7 @@ namespace WPFCore.ViewModelSupport
         /// all properties are regarded as having changed.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
-        protected void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             this.VerifyPropertyName(propertyName);
 

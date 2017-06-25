@@ -55,6 +55,14 @@ namespace WPFCore.ComponentModel
         }
 
         /// <summary>
+        /// Liefert das Element dieser Instanz.
+        /// </summary>
+        public object SelectedItem
+        {
+            get { return this.item; }
+        }
+
+        /// <summary>
         /// Ereignis tritt ein, wenn sich der Auswhalzustand der Instanz ändert.
         /// </summary>
         public event EventHandler SelectionStateChanged;

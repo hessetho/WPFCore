@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace WPFCore.Helper
 {
@@ -31,5 +32,15 @@ namespace WPFCore.Helper
             return currentElement == element ? null : currentElement;
         }
 
+        public static void DumpProperties(Type t)
+        {
+            var propInfo = t.GetProperties();
+
+            Console.WriteLine(string.Format("Properties of the type {0}", t.Name));
+            foreach (var prop in propInfo)
+            {
+                Console.WriteLine(string.Format("{0} - {1}", prop.Name, prop.PropertyType.Name));
+            }
+        }
     }
 }

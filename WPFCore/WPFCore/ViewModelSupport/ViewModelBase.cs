@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Threading;
 using System.Xml;
@@ -140,7 +141,7 @@ namespace WPFCore.ViewModelSupport
         /// <seealso cref="IsInitialized"/>
         /// <seealso cref="IsInitializing"/>
         /// <see cref="DoesNotAffectChangesFlagAttribute"/>
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName="")
         {
             // we'll never modify the HasChanges flag while initializing (any property)
             // or changing properties which shall not affect the HasChanges flag

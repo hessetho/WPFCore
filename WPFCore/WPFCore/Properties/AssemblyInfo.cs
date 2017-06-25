@@ -55,6 +55,7 @@ using System.Windows.Markup;
 
 [assembly: XmlnsPrefix("http://schemas.ICEP.com/wpf/2015/xaml", "wpc")]
 [assembly: XmlnsDefinition("http://schemas.ICEP.com/wpf/2015/xaml", "WPFCore")]
+[assembly: XmlnsDefinition("http://schemas.ICEP.com/wpf/2015/xaml", "WPFCore.Data")]
 [assembly: XmlnsDefinition("http://schemas.ICEP.com/wpf/2015/xaml", "WPFCore.XAML")]
 [assembly: XmlnsDefinition("http://schemas.ICEP.com/wpf/2015/xaml", "WPFCore.XAML.Controls")]
 [assembly: XmlnsDefinition("http://schemas.ICEP.com/wpf/2015/xaml", "WPFCore.XAML.Behaviors")]

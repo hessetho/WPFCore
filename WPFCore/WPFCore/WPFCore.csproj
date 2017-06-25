@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AppContext.cs" />
     <Compile Include="ComponentModel\IUserFriendly.cs" />
+    <Compile Include="ComponentModel\ObservableSelectionList.cs" />
     <Compile Include="ComponentModel\SelectableItemsList.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DataKiosk\DataKiosk.cs" />
@@ -85,6 +86,9 @@
     <Compile Include="Data\SortableList.cs" />
     <Compile Include="Data\%28internal%29\ValidateDateRangeAttribute.cs" />
     <Compile Include="Delegates.cs" />
+    <Compile Include="Diagnostics\AllTracesListener.cs" />
+    <Compile Include="Diagnostics\SingleTraceListener.cs" />
+    <Compile Include="Diagnostics\TraceMessage.cs" />
     <Compile Include="Helper\ConfigurationStringHelper.cs" />
     <Compile Include="Helper\Cryptor.cs" />
     <Compile Include="Helper\CultureHelper.cs" />

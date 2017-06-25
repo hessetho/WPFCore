@@ -85,33 +85,34 @@ namespace WPFCore.Data.Performance
 
         private Dictionary<string, PerformanceItem> GetPerformanceItems(string categoryName)
         {
-            Monitor.Enter(this.lockObj);
-            Dictionary<string, PerformanceItem> pItems;
-            var category = string.IsNullOrEmpty(categoryName) ? "General" : categoryName;
-            if (this.performanceCategories.TryGetValue(category, out pItems) == false)
+            lock (this.lockObj)
             {
-                pItems = new Dictionary<string, PerformanceItem>();
-                this.performanceCategories.Add(category, pItems);
-            }
-            Monitor.Exit(this.lockObj);
+                Dictionary<string, PerformanceItem> pItems;
+                var category = string.IsNullOrEmpty(categoryName) ? "General" : categoryName;
+                if (this.performanceCategories.TryGetValue(category, out pItems) == false)
+                {
+                    pItems = new Dictionary<string, PerformanceItem>();
+                    this.performanceCategories.Add(category, pItems);
+                }
 
-            return pItems;
+                return pItems;
+            }
         }
 
         private PerformanceItem GetPerformanceItem(string category, string itemName)
         {
             var pItems = this.GetPerformanceItems(category);
 
-            Monitor.Enter(this.lockObj);
-            PerformanceItem pItem;
-            if (pItems.TryGetValue(itemName, out pItem) == false)
+            lock (this.lockObj)
             {
-                pItem = new PerformanceItem(category, itemName);
-                pItems.Add(itemName, pItem);
+                PerformanceItem pItem;
+                if (pItems.TryGetValue(itemName, out pItem) == false)
+                {
+                    pItem = new PerformanceItem(category, itemName);
+                    pItems.Add(itemName, pItem);
+                }
+                return pItem;
             }
-            Monitor.Exit(this.lockObj);
-
-            return pItem;
         }
 
         #region Load & Save

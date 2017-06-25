@@ -147,7 +147,10 @@ namespace WPFCore.ViewModelSupport
         {
             get { return (T) this.collectionViewSource.View.CurrentItem; }
             set 
-            { 
+            {
+                if (value!=null && !this.Source.Contains(value))
+                    throw new InvalidOperationException("The requested item does not exist in the Collection.");
+
                 if(this.collectionViewSource.View.CurrentItem != value)
                     this.collectionViewSource.View.MoveCurrentTo(value); 
             }
@@ -436,8 +439,7 @@ namespace WPFCore.ViewModelSupport
             this.OnPropertyChanged("SelectedRow");
             this.OnPropertyChanged("HasSelection");
 
-            if (this.CurrentChanged != null)
-                this.CurrentChanged(this, this.SelectedRow);
+            this.CurrentChanged?.Invoke(this, this.SelectedRow);
         }
 
         /// <summary>
@@ -453,8 +455,7 @@ namespace WPFCore.ViewModelSupport
             this.OnPropertyChanged("HasRows");
 
             // let the event bubble
-            if (this.CollectionChanged != null)
-                this.CollectionChanged(this, e);
+            this.CollectionChanged?.Invoke(this, e);
         }
 
         #region EXPERIMENTAL ... defer refresh

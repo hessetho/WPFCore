@@ -266,8 +266,7 @@ namespace WPFCore.XAML.Controls
                 this.AddDayToGrid(nextDate.AddDays(idx), row, col + idx + 1, false);
 
             // Die Termine ergänzen, diese dazu ggf. erst befüllen lassen
-            if(this.MonthChanged!=null)
-                this.MonthChanged(this, new MonthChangedEventArgs(this.CurrentMonth, this.CurrentYear));
+            this.MonthChanged?.Invoke(this, new MonthChangedEventArgs(this.CurrentMonth, this.CurrentYear));
 
             this.ApplyAppointments();
         }
@@ -282,6 +281,10 @@ namespace WPFCore.XAML.Controls
                 LogicalTreeHelper.FindLogicalNode(dayBox, "PART_AppointmentList") as ItemsControl;
             if (appointmentItemsControl != null)
                 appointmentItemsControl.ItemTemplate = this.AppointmentBoxTemplate;
+
+
+            if(this.monthViewGrid.RowDefinitions.Count < row + 1)
+                this.monthViewGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
             // Einrichten
             dayBox.DataContext = this.CreateCalendarDay(date, isCurrentMonth);
@@ -318,9 +321,12 @@ namespace WPFCore.XAML.Controls
         {
             if (this.monthViewGrid == null) return;
 
-            while (this.monthViewGrid.RowDefinitions.Count < 6)
-                this.monthViewGrid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(1, GridUnitType.Star)});
+            this.monthViewGrid.RowDefinitions.Clear();
+            // Zeilen der Wochen
+            //while (this.monthViewGrid.RowDefinitions.Count < 5)
+            //    this.monthViewGrid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(1, GridUnitType.Star)});
 
+            // Spalten der Tage
             this.monthViewGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(1, GridUnitType.Auto)});
             while (this.monthViewGrid.ColumnDefinitions.Count < 8)
                 this.monthViewGrid.ColumnDefinitions.Add(new ColumnDefinition

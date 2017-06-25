@@ -6,7 +6,6 @@ namespace WPFCore.Data.Performance
     public class PerformanceItem : IDisposable
     {
         private string category;
-        private bool isRegistered;
         private string itemName;
         private DateTime? startTime;
 
@@ -104,14 +103,13 @@ namespace WPFCore.Data.Performance
             set { this.LatestDuration = new TimeSpan(value); }
         }
 
-        private void TryRegisterPerformanceItem()
-        {
-            if (string.IsNullOrEmpty(this.category) || string.IsNullOrEmpty(this.itemName))
-                return;
+        //private void TryRegisterPerformanceItem()
+        //{
+        //    if (string.IsNullOrEmpty(this.category) || string.IsNullOrEmpty(this.itemName))
+        //        return;
 
-            PerformanceCenter.AddPerformanceItem(this);
-            this.isRegistered = true;
-        }
+        //    PerformanceCenter.AddPerformanceItem(this);
+        //}
 
         public void StartTiming()
         {

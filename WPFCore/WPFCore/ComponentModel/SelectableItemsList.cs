@@ -10,7 +10,6 @@ namespace WPFCore.ComponentModel
     public class SelectableItemsList<T> : List<Selectable<T>>, INotifyPropertyChanged
         where T : IUserFriendly
     {
-
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler SelectionChanged;
 

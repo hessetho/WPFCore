@@ -48,3 +48,5 @@ E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest_MarkupComp
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest.g.resources
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest.Properties.Resources.resources
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest.csproj.GenerateResource.Cache
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest_MarkupCompile.lref

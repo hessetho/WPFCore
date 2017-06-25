@@ -80,10 +80,22 @@ namespace WPFCore.ViewModelSupport
         /// <returns></returns>
         private static OpenWindowDelegate GetOpenWindowCallback(Type dataItemType)
         {
-            if (!RegisteredWindows.ContainsKey(dataItemType))
-                RegisteredWindows.Add(dataItemType, null);
+            if (RegisteredWindows.ContainsKey(dataItemType))
+                return RegisteredWindows[dataItemType];
 
-            return RegisteredWindows[dataItemType];
+            if (!dataItemType.IsGenericType)
+            {
+                if (!RegisteredWindows.ContainsKey(dataItemType))
+                    RegisteredWindows.Add(dataItemType, null);
+                return RegisteredWindows[dataItemType];
+            }
+
+            // check if an interface is implemented, which is registered
+            foreach(var iface in dataItemType.GetInterfaces())
+                if (RegisteredWindows.ContainsKey(iface))
+                    return RegisteredWindows[iface];
+
+            return null;
         }
 
         /// <summary>
@@ -93,10 +105,22 @@ namespace WPFCore.ViewModelSupport
         /// <returns></returns>
         private static OpenDialogDelegate GetOpenDialogCallback(Type dataItemType)
         {
-            if (!RegisteredDialogs.ContainsKey(dataItemType))
-                RegisteredDialogs.Add(dataItemType, null);
+            if (RegisteredDialogs.ContainsKey(dataItemType))
+                return RegisteredDialogs[dataItemType];
 
-            return RegisteredDialogs[dataItemType];
+            if (!dataItemType.IsGenericType)
+            {
+                if (!RegisteredDialogs.ContainsKey(dataItemType))
+                    RegisteredDialogs.Add(dataItemType, null);
+                return RegisteredDialogs[dataItemType];
+            }
+
+            // check if an interface is implemented, which is registered
+            foreach (var iface in dataItemType.GetInterfaces())
+                if (RegisteredDialogs.ContainsKey(iface))
+                    return RegisteredDialogs[iface];
+
+            return null;
         }
     
     }

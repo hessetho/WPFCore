@@ -20,5 +20,10 @@ namespace WPFCore.ComponentModel
         /// Ereignis tritt ein, wenn sich der Auswhalzustand der Instanz ändert.
         /// </summary>
         event EventHandler SelectionStateChanged;
+
+        /// <summary>
+        /// Liefert diese Instanz. Bei generischen Objekten, die <c>ISelectable</c> implementieren wird das eigentiliche Objekt geliefert.
+        /// </summary>
+        object SelectedItem { get; }
     }
 }

@@ -168,7 +168,7 @@
                                 </Grid>
                             </Border>
 
-                            <!-- Leist der Wochentage -->
+                            <!-- Leiste der Wochentage -->
                             <Border Grid.Row="1">
                                 <Grid x:Name="PART_DayNames">
                                     <Grid.ColumnDefinitions>

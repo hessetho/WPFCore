@@ -97,8 +97,12 @@ namespace WPFCore.StatusText
                             }
                             break;
                         case StatusUpdateType.UpdateBusyIdle:
-                            if (e.IsBusy != this.isBusy)
-                                this.IsBusy = e.IsBusy;
+                            this.IsBusy = e.IsBusy;
+                            if (this.isBusy)
+                                this.SignalBusy(sender);
+                            else
+                                this.SignalIdle(sender);
+
                             break;
                         case StatusUpdateType.UpdatePercent:
                             this.Percent = e.Percent;
@@ -152,11 +156,6 @@ namespace WPFCore.StatusText
 
                 this.isBusy = value;
 
-                if (this.isBusy)
-                    this.SignalBusy();
-                else
-                    this.SignalIdle();
-
                 this.OnPropertyChanged("IsBusy");
             }
         }
@@ -193,19 +192,17 @@ namespace WPFCore.StatusText
         /// <summary>
         /// Signals the busy status.
         /// </summary>
-        protected void SignalBusy()
+        protected void SignalBusy(object sender)
         {
-            if (this.BusyStateChanged != null)
-                this.BusyStateChanged(this, true);
+            this.BusyStateChanged?.Invoke(sender, true);
         }
 
         /// <summary>
         /// Signals the idle status.
         /// </summary>
-        protected void SignalIdle()
+        protected void SignalIdle(object sender)
         {
-            if (this.BusyStateChanged != null)
-                this.BusyStateChanged(this, false);
+            this.BusyStateChanged?.Invoke(sender, false);
         }
         #endregion
 
