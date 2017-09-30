@@ -63,6 +63,7 @@
     <Compile Include="Data\DateRangeType.cs" />
     <Compile Include="Data\DateRangeTypes.cs" />
     <Compile Include="Data\DayGroupEnum.cs" />
+    <Compile Include="Data\FlexData\FlexColumnDefinitionCollection.cs" />
     <Compile Include="Data\FlexData\FlexColumnDefinition.cs" />
     <Compile Include="Data\FlexData\ColumnPropertyDescriptor.cs" />
     <Compile Include="Data\FlexData\FlexRow.cs" />
@@ -85,6 +86,12 @@
     <Compile Include="Data\SerializableDictionary.cs" />
     <Compile Include="Data\SortableList.cs" />
     <Compile Include="Data\%28internal%29\ValidateDateRangeAttribute.cs" />
+    <Compile Include="Data\StructuredDataReader\DataRowError.cs" />
+    <Compile Include="Data\StructuredDataReader\DelimitedFileReader.cs" />
+    <Compile Include="Data\StructuredDataReader\FileReaderBase.cs" />
+    <Compile Include="Data\StructuredDataReader\ReaderBase.cs" />
+    <Compile Include="Data\StructuredDataReader\RowProcessingEventHandler.cs" />
+    <Compile Include="Data\StructuredDataReader\StructuredDataRow.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Diagnostics\AllTracesListener.cs" />
     <Compile Include="Diagnostics\SingleTraceListener.cs" />

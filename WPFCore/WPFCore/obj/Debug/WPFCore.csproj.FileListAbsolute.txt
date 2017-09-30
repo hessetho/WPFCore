@@ -102,3 +102,4 @@ E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\XAML\Styles\ValidationStyl
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore.g.resources
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore.dll
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore.pdb
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore.csprojResolveAssemblyReference.cache

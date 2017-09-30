@@ -14,6 +14,9 @@ namespace WPFCore.Data.FlexData
         /// </summary>
         private PropertyDescriptorCollection propertyDescriptors;
 
+        private List<ColumnPropertyDescriptor> columnPropertyDescriptors;
+
+
         /// <summary>
         ///     Speichert die Werte der einzelnen Spalten
         /// </summary>
@@ -81,18 +84,37 @@ namespace WPFCore.Data.FlexData
         }
 
         /// <summary>
+        /// Let inherited instances query the property descriptor of a specific column
+        /// </summary>
+        /// <param name="columnPropertyName"></param>
+        /// <returns></returns>
+        protected ColumnPropertyDescriptor GetPropertyDescriptor(string columnPropertyName)
+        {
+            foreach(var pdc in this.propertyDescriptors)
+            {
+                var cpdc = pdc as ColumnPropertyDescriptor;
+                if (cpdc != null && cpdc.PropertyName == columnPropertyName)
+                    return cpdc;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Sets the property descriptors for the columns.
         /// </summary>
         /// <param name="propertyDescriptors">The column property descriptors.</param>
         internal void SetPropertyDescriptors(List<ColumnPropertyDescriptor> propertyDescriptors)
         {
+            this.columnPropertyDescriptors = propertyDescriptors;
+
             var allPropertyDescriptors = new List<PropertyDescriptor>(propertyDescriptors);
 
             // collect all "original" properties of the current instance and add them to the "artificial" properties
             foreach (PropertyDescriptor nativePropDesc in TypeDescriptor.GetProperties(this, true))
                 allPropertyDescriptors.Add(nativePropDesc);
 
-            // and convert the list into a proper colelction for later use (see GetProperties)
+            // and convert the list into a proper collection for later use (see GetProperties)
             this.propertyDescriptors = new PropertyDescriptorCollection(allPropertyDescriptors.ToArray());
 
             // create the "columns" from the supplied property descriptors
@@ -427,13 +449,15 @@ namespace WPFCore.Data.FlexData
             }
         }
 
+        protected List<ColumnPropertyDescriptor> ColumnPropertyDescriptors { get => columnPropertyDescriptors; }
+
         internal List<ColumnPropertyDescriptor> GetColumnProperties(PivotColumnType columnType)
         {
-            return this.propertyDescriptors.Cast<ColumnPropertyDescriptor>().Where(pdc => pdc.PivotColumnType == columnType).ToList();
+            return this.columnPropertyDescriptors.Cast<ColumnPropertyDescriptor>().Where(pdc => pdc.PivotColumnType == columnType).ToList();
         }
 
         [Conditional("DEBUG")]
-        private void DumpProperties()
+        public void DumpProperties()
         {
             foreach (ColumnPropertyDescriptor pd in this.propertyDescriptors)
             {

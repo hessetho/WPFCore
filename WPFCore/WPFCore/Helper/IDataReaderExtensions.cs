@@ -199,6 +199,40 @@ namespace WPFCore.Helper
 
         #endregion GetDateTime extensions
 
+        #region GetTimeSpan extensions
+
+        public static TimeSpan GetTimeSpan(this IDataReader reader, string columnName)
+        {
+            var index = reader.GetOrdinal(columnName);
+            return (TimeSpan)reader[index];
+        }
+
+        public static TimeSpan? GetTimeSpanNullable(this IDataReader reader, int index)
+        {
+            return GetTimeSpanNullable(reader, index, null);
+        }
+
+        public static TimeSpan? GetTimeSpanNullable(this IDataReader reader, string columnName)
+        {
+            var index = reader.GetOrdinal(columnName);
+            return reader.GetTimeSpanNullable(index);
+        }
+
+        public static TimeSpan? GetTimeSpanNullable(this IDataReader reader, int index, TimeSpan? defaultValue)
+        {
+            if (reader.IsDBNull(index))
+                return defaultValue;
+            return (TimeSpan)reader[index];
+        }
+
+        public static TimeSpan? GetTimeSpanNullable(this IDataReader reader, string columnName, TimeSpan? defaultValue)
+        {
+            var index = reader.GetOrdinal(columnName);
+            return GetTimeSpanNullable(reader, index, defaultValue);
+        }
+
+        #endregion GetTimeSpan extensions
+
         #region GetBoolean extensions
 
         public static bool? GetBooleanNullable(this IDataReader reader, int index)

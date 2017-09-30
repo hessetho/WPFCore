@@ -29,10 +29,58 @@
             </Grid>
         </TabItem>
 
-        <TabItem Header="xxx">
+        <TabItem Header="Eval tree">
             <TabItem.DataContext>
                 <vm:EvaluationTreeTestViewModel/>
             </TabItem.DataContext>
+        </TabItem>
+
+        <TabItem Header="csv">
+            <TabItem.DataContext>
+                <vm:CsvReaderViewModel/>
+            </TabItem.DataContext>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Analysieren"
+                                Command="{Binding Path=CommandAnalyseStructure}"/>
+                        <Button Content="Einlesen"
+                                Command="{Binding Path=CommandReadData}"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0">
+                            <ItemsControl ItemsSource="{Binding Path=ColumnDefinitions}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=ColumnPropertyName}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                        </Border>
+
+                        <Border Grid.Column="1">
+                            <DataGrid ItemsSource="{Binding Path=Rows}"/>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
         </TabItem>
     </TabControl>
 </Window>

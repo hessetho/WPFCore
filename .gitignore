@@ -1,4 +1,8 @@
 *.lref
 *.cache
+*.baml
 # ignore any obj folders
 WPFCore/WPFCore/obj/
+*.dll
+*.pdb
+*.cache

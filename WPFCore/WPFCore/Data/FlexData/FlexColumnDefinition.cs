@@ -40,7 +40,7 @@ namespace WPFCore.Data.FlexData
         /// <summary>
         /// Gets the data type of the column
         /// </summary>
-        public Type ColumnType { get; private set; }
+        public Type ColumnType { get; set; }
 
         /// <summary>
         /// Gets the internal name of the column. This is used to identify the column.
@@ -54,6 +54,11 @@ namespace WPFCore.Data.FlexData
         /// Gets the property name of the data source, which (usually) corresponds to a physical column name in the data source.
         /// </summary>
         public string SourcePropertyName { get; private set; }
+
+
+        public int Index { get; internal set; }
+
+        public FlexColumnDefinitionCollection ParentCollection { get; internal set; }
 
         /// <summary>
         /// A tag that can be applied to the column by the application. Not used internally.

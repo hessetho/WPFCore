@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace WPFCore.Data.FlexData
 {
-    internal enum PivotColumnType
+    public enum PivotColumnType
     {
         RowHeader,
         PivotColumn,
@@ -14,7 +14,7 @@ namespace WPFCore.Data.FlexData
     /// <summary>
     ///     Spezialisierter <see cref="PropertyDescriptor" />
     /// </summary>
-    internal class ColumnPropertyDescriptor : PropertyDescriptor, IComparable
+    public class ColumnPropertyDescriptor : PropertyDescriptor, IComparable
     {
         private readonly string description;
         private readonly string displayName;
