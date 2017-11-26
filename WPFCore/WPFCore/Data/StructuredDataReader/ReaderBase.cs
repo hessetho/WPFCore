@@ -55,7 +55,7 @@ namespace WPFCore.Data.StructuredDataReader
         /// <summary>
         ///     Liest die Daten aus der Datenquelle ein
         /// </summary>
-        public abstract FlexTable<StructuredDataRow> DoReadData(string dataFileName);
+        public abstract FileReaderResult DoReadData(string dataFileName);
 
         /*
         private DataRowFactory rowFactory;

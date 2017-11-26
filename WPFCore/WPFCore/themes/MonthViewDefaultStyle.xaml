@@ -1,7 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Controls="clr-namespace:WPFCore.XAML.Controls"
-                    xmlns:data="clr-namespace:WPFCore.Data">
+                    xmlns:data="clr-namespace:WPFCore.Data"
+                    xmlns:conv="clr-namespace:WPFCore.XAML.Converter">
+
+    <conv:DebugConverter x:Key="Debug"/>
 
     <Style TargetType="Controls:MonthView">
         <Setter Property="Template">
@@ -149,22 +152,36 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
                                     <Button x:Name="PART_PrevMonthButton"
-                                            Grid.Column="0">
+                                            Grid.Column="0"
+                                            Height="22" Width="22">
                                         <Path Data="M 0 4 L 4 0 L 4 8 Z"
                                               Fill="Black" />
                                     </Button>
 
                                     <Button x:Name="PART_NextMonthButton"
-                                            Grid.Column="1">
+                                            Grid.Column="1"
+                                            Height="22" Width="22">
                                         <Path Data="M 0 0 L 4 4 L 0 8 Z"
                                               Fill="Black" />
                                     </Button>
 
-                                    <Label Grid.Column="2"
-                                           Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MonthName}" />
+                                    <!--<Label Grid.Column="3"
+                                           Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CurrentMonth}" />-->
+
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal" >
+                                        <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MonthList}" 
+                                                  SelectedValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CurrentMonth, Mode=TwoWay, Converter={StaticResource Debug}}"
+                                                  SelectedValuePath="Key"
+                                                  DisplayMemberPath="Value"
+                                                  Width="100"/>
+                                        <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=YearList}" 
+                                                  SelectedValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CurrentYear, Mode=TwoWay, Converter={StaticResource Debug}}"
+                                                  Width="100"/>
+                                    </StackPanel>
                                 </Grid>
                             </Border>
 

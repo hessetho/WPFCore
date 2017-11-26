@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
@@ -68,6 +69,42 @@ namespace WPFCore.XAML.Controls
         }
 
         /// <summary>
+        /// Liste der Jahre
+        /// </summary>
+        public ObservableCollection<int> YearList
+        {
+            get { return ((ObservableCollection<int>)(GetValue(MonthView.YearListProperty))); }
+            set { SetValue(MonthView.YearListProperty, value); }
+        }
+
+        /// <summary>
+        /// Monatsliste
+        /// </summary>
+        public ObservableCollection<KeyValuePair<int, string>> MonthList
+        {
+            get { return ((ObservableCollection<KeyValuePair<int, string>>)(GetValue(MonthView.MonthListProperty))); }
+            set { SetValue(MonthView.MonthListProperty, value); }
+        }
+
+        /// <summary>
+        /// Erstes Jahr in der Jahresliste (Standard: aktuelles Jahr - 5)
+        /// </summary>
+        public int FirstYear
+        {
+            get { return ((int)(GetValue(MonthView.FirstYearProperty))); }
+            set { SetValue(MonthView.FirstYearProperty, value); }
+        }
+
+        /// <summary>
+        /// Letztes Jahr in der Jahresliste (Standard: aktuelles Jahr + 1)
+        /// </summary>
+        public int LastYear
+        {
+            get { return ((int)(GetValue(MonthView.LastYearProperty))); }
+            set { SetValue(MonthView.LastYearProperty, value); }
+        }
+
+        /// <summary>
         ///     DataTemplate für einen Tag
         /// </summary>
         public DataTemplate DayBoxTemplate
@@ -110,6 +147,15 @@ namespace WPFCore.XAML.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            this.DeferUpdates();
+
+            // Monatsliste einrichten
+            this.MonthList = new ObservableCollection<KeyValuePair<int, string>>();
+            for (int m = 1; m <= 12; m++)
+                this.MonthList.Add( new KeyValuePair<int, string>(m, new DateTime(1900, m, 1).ToString("MMMM")));
+            // Liste der Jahre einrichten
+            this.YearList = new ObservableCollection<int>();
+            this.BuildYearList();
 
             this.CurrentYear = DateTime.Today.Year;
             this.CurrentMonth = DateTime.Today.Month;
@@ -151,8 +197,9 @@ namespace WPFCore.XAML.Controls
             //        var ctrl = sender;
             //    };
             //};
+            this.AllowUpdates();
 
-            // Initiale Monatsansicht
+            // Initiale Monatsansicht erzeugen
             this.BuildMonthView();
         }
 
@@ -179,15 +226,27 @@ namespace WPFCore.XAML.Controls
             monthView.BuildMonthView();
         }
 
+        private static void OnCurrentYearMonthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var monthView = (MonthView)d;
+            monthView.BuildMonthView();
+        }
+
+        private static void OnRebuildYearList(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var monthView = (MonthView)d;
+            monthView.BuildYearList();
+        }
+
         public static DependencyProperty AppointmentBoxTemplateProperty =
             DependencyProperty.Register("AppointmentBoxTemplate", typeof (DataTemplate), typeof (MonthView),
                 new PropertyMetadata(OnAppointmentBoxTemplateChanged));
 
         public static DependencyProperty CurrentMonthProperty =
-            DependencyProperty.Register("CurrentMonth", typeof (int), typeof (MonthView));
+            DependencyProperty.Register("CurrentMonth", typeof (int), typeof (MonthView), new PropertyMetadata(OnCurrentYearMonthChanged));
 
         public static DependencyProperty CurrentYearProperty =
-            DependencyProperty.Register("CurrentYear", typeof (int), typeof (MonthView));
+            DependencyProperty.Register("CurrentYear", typeof (int), typeof (MonthView), new PropertyMetadata(OnCurrentYearMonthChanged));
 
         public static DependencyProperty DayBoxTemplateProperty =
             DependencyProperty.Register("DayBoxTemplate", typeof (DataTemplate), typeof (MonthView));
@@ -203,28 +262,63 @@ namespace WPFCore.XAML.Controls
             DependencyProperty.Register("SelectedDay", typeof (CalendarDay), typeof (MonthView),
                 new PropertyMetadata(OnSelectedDayChanged));
 
+        /// <summary>
+        /// Eigenschaft: Liste der Monates
+        /// </summary>
+        public static DependencyProperty MonthListProperty =
+                    DependencyProperty.Register("MonthList", typeof(ObservableCollection<KeyValuePair<int, string>>), typeof(MonthView));
+
+        /// <summary>
+        /// Eigenschaft: Liste der Jahre
+        /// </summary>
+        public static DependencyProperty YearListProperty =
+                    DependencyProperty.Register("YearList", typeof(ObservableCollection<int>), typeof(MonthView));
+
+        /// <summary>
+        /// Eigenschaft: Erstes Jahr in der Jahresliste
+        /// </summary>
+        public static DependencyProperty FirstYearProperty =
+                    DependencyProperty.Register("FirstYear", typeof(int), typeof(MonthView), new PropertyMetadata(DateTime.Today.Year - 5, OnRebuildYearList));
+
+        /// <summary>
+        /// Eigenschaft: Letztes Jahr in der Jahresliste
+        /// </summary>
+        public static DependencyProperty LastYearProperty =
+                    DependencyProperty.Register("LastYear", typeof(int), typeof(MonthView), new PropertyMetadata(DateTime.Today.Year + 1, OnRebuildYearList));
+
         #region Navigation
 
         private void PreviousMonthClicked(object sender, RoutedEventArgs e)
         {
-            this.CurrentMonth--;
-            if (this.CurrentMonth < 1)
+            this.DeferUpdates();
+            if (this.CurrentMonth == 1)
             {
                 this.CurrentMonth = 12;
                 this.CurrentYear--;
             }
+            else
+                this.CurrentMonth--;
+            this.AllowUpdates();
 
             this.BuildMonthView();
         }
 
+        private bool updatingDeferred = false;
+        private void DeferUpdates() { this.updatingDeferred = true; }
+        private void AllowUpdates() { this.updatingDeferred = false; }
+
+
         private void NextMonthClicked(object sender, RoutedEventArgs e)
         {
-            this.CurrentMonth++;
-            if (this.CurrentMonth > 12)
+            this.DeferUpdates();
+            if (this.CurrentMonth == 12)
             {
                 this.CurrentMonth = 1;
                 this.CurrentYear++;
             }
+            else
+                this.CurrentMonth++;
+            this.AllowUpdates();
 
             this.BuildMonthView();
         }
@@ -235,7 +329,7 @@ namespace WPFCore.XAML.Controls
 
         private void BuildMonthView()
         {
-            if (this.monthViewGrid == null) return;
+            if (this.monthViewGrid == null || updatingDeferred) return;
             this.BuildGrid();
 
             var refDate = new DateTime(this.CurrentYear, this.CurrentMonth, 1);
@@ -269,6 +363,13 @@ namespace WPFCore.XAML.Controls
             this.MonthChanged?.Invoke(this, new MonthChangedEventArgs(this.CurrentMonth, this.CurrentYear));
 
             this.ApplyAppointments();
+        }
+
+        private void BuildYearList()
+        {
+            this.YearList.Clear();
+            for (int y = this.FirstYear; y <= this.LastYear; y++)
+                this.YearList.Add(y);
         }
 
         private void AddDayToGrid(DateTime date, int row, int col, bool isCurrentMonth)

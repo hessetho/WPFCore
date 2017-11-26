@@ -1,4 +1,6 @@
-﻿using System.CodeDom.Compiler;
+﻿using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -9,8 +11,12 @@ using System.Xml.Serialization;
 
 namespace WPFCore.Data.StructuredDataReader
 {
+    public delegate void SkippedLinesProcessorDelegate(object sender, List<string> lines);
+
     public abstract class FileReaderBase : ReaderBase
     {
+        public SkippedLinesProcessorDelegate ProcessLeadingLinesCallback { get; set; }
+
         protected FileReaderBase()
         {
             // initialize correctly
@@ -73,6 +79,16 @@ namespace WPFCore.Data.StructuredDataReader
         /// </summary>
         /// <value>The filename.</value>
         public string Filename { get; set; }
+
+
+        public virtual void DumpReaderInfo()
+        {
+            Console.WriteLine("Reader: {0}", (object)this.GetType().Name);
+            Console.WriteLine("\tCulture: {0}", (object)this.FileCultureName);
+            Console.WriteLine("\tSkipping {0} leading rows", this.SkipLeadingRows);
+            Console.WriteLine("\tSkipping {0} trailing rows", this.SkipTrailingRows);
+            Console.WriteLine("\tFile has column headers: {0}", this.ContainsColumnHeaders ? "yes" : "no");
+        }
 
     }
 }

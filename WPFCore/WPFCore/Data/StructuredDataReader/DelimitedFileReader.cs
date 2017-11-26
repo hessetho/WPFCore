@@ -15,6 +15,7 @@ namespace WPFCore.Data.StructuredDataReader
         public DelimitedFileReader()
         {
             this.ColumnDelimiter = "\\t";
+            this.ColumnDefinitions = new FlexColumnDefinitionCollection();
         }
 
         /// <summary>
@@ -190,19 +191,17 @@ namespace WPFCore.Data.StructuredDataReader
             return columnDefinitionCollection;
         }
 
-        public override FlexTable<StructuredDataRow> DoReadData(string dataFileName)
+        public override FileReaderResult DoReadData(string dataFileName)
         {
-            var lastRows = new Queue<StructuredDataRow>();
-            int rowCounter = 0;
-
             if (dataFileName == string.Empty)
                 throw new ApplicationException("Filename not specified");
 
             if (!File.Exists(dataFileName))
                 throw new FileNotFoundException(string.Format("File '{0}' not found", dataFileName));
 
-            // Liste der Datenzeilen anhand der Definition Spalten und des PKs erzeugen
-            var rows = new FlexTable<StructuredDataRow>(this.ColumnDefinitions.AsList());
+            var result = new FileReaderResult(this.ColumnDefinitions.AsList());
+            var lastRows = new Queue<StructuredDataRow>();
+            int rowCounter = 0;
 
             // Ländereinstellung merken und setzen
             CultureInfo ci = Thread.CurrentThread.CurrentCulture;
@@ -219,9 +218,13 @@ namespace WPFCore.Data.StructuredDataReader
                     int count = this.SkipLeadingRows;
                     while (currentLine != null && count-- > 0)
                     {
+                        result.LeadingRows.Add(currentLine);
                         currentLine = tr.ReadLine();
                         rowCounter++;
                     }
+
+                    // die übersprungenen Zeilen verarbeiten lassen (wenn eingerichtet)
+                    this.ProcessLeadingLinesCallback?.Invoke(this, result.LeadingRows);
 
                     // Wenn die erste Zeile die Spaltennamen enthält, werden die hier ausgelesen und überprüft
                     if (this.ContainsColumnHeaders)
@@ -232,7 +235,7 @@ namespace WPFCore.Data.StructuredDataReader
                         string[] columnNames = currentLine.SplitQuoted(this.InternalColumnDelimiter[0]);
                         for (int i = 0; i < columnNames.Length; i++)
                         {
-                            columnNames[i] = columnNames[i].Trim().Replace("\"", ""); // remove quotes and blanks!
+                            columnNames[i] = columnNames[i].Trim().Replace("\"", ""); // remove quotes and leading/trailing blanks!
                             if (string.IsNullOrEmpty(columnNames[i]))
                                 columnNames[i] = string.Format("unnamed_{0}", emptyCnt++);
 
@@ -244,7 +247,7 @@ namespace WPFCore.Data.StructuredDataReader
                         {
                             var ex = new InvalidDataException( string.Format( "Unbekannte Spalten: {0}",invalidColNames));
 //                            rows.AddError(ex, "Ungültige Dateistruktur erkannt.");
-                            return rows;
+                            return result;
                         }
 
                         // nächste Zeile lesen (= 1. Datenzeile)
@@ -264,7 +267,7 @@ namespace WPFCore.Data.StructuredDataReader
                         string[] values = currentLine.SplitQuoted(this.InternalColumnDelimiter[0]);
 
                         // Eine neue Datenzeile erzeugen
-                        var row = rows.NewRow<StructuredDataRow>("");
+                        var row = result.Rows.NewRow<StructuredDataRow>("");
                         row.RowNumber = rowCounter;
                         row.RawData = currentLine;
 
@@ -275,7 +278,7 @@ namespace WPFCore.Data.StructuredDataReader
                             errorCount++;
 
                         // Die neue Datenzeile der Liste anhängen
-                        rows.Add(row);
+                        result.Rows.Add(row);
 
                         // Die neue Zeile dem Speicher der letzten Zeilen hinzufügen und in diesem nur soviele Zeilen behalten, wie SkipTrailingRows erfordert
                         if (this.SkipTrailingRows > 0)
@@ -300,7 +303,11 @@ namespace WPFCore.Data.StructuredDataReader
                 // am Dateiende überlesen werden sollen, wieder raus
                 if (this.SkipTrailingRows > 0)
                     while (lastRows.Count > 0)
-                        rows.Remove(lastRows.Dequeue());
+                    {
+                        var row = lastRows.Dequeue();
+                        result.Rows.Remove(row);
+                        result.TrailingRows.Add(row.RawData);
+                    }
 
                 // Ländereinstellung restaurieren
                 Thread.CurrentThread.CurrentCulture = ci;
@@ -309,8 +316,14 @@ namespace WPFCore.Data.StructuredDataReader
             // abschließend die Anzahl gelesener Zeilen veröffentlichen (muss nicht mit der tatsächlichen übereinstimmen)
             this.OnRowProcessing(dataFileName, rowCounter, true);
 
-            return rows;
+            return result;
         }
 
+
+        public override void DumpReaderInfo()
+        {
+            base.DumpReaderInfo();
+            Console.WriteLine("\tDelimiter: {0}", (object)this.ColumnDelimiter);
+        }
     }
 }

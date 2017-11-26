@@ -119,7 +119,7 @@ namespace WPFCore.Data.Performance
         public void StopTiming()
         {
             if (!this.startTime.HasValue)
-                throw new InvalidOperationException("Can't stop a timer that hasn't been started.");
+                throw new InvalidOperationException(string.Format("Can't stop a timer that hasn't been started. ({0})", this.ItemName));
 
             this.Add(DateTime.Now - this.startTime.Value);
 

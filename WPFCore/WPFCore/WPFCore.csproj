@@ -89,6 +89,7 @@
     <Compile Include="Data\StructuredDataReader\DataRowError.cs" />
     <Compile Include="Data\StructuredDataReader\DelimitedFileReader.cs" />
     <Compile Include="Data\StructuredDataReader\FileReaderBase.cs" />
+    <Compile Include="Data\StructuredDataReader\FileReaderResult.cs" />
     <Compile Include="Data\StructuredDataReader\ReaderBase.cs" />
     <Compile Include="Data\StructuredDataReader\RowProcessingEventHandler.cs" />
     <Compile Include="Data\StructuredDataReader\StructuredDataRow.cs" />
