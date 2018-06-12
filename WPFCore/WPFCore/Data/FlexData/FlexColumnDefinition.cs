@@ -61,36 +61,6 @@ namespace WPFCore.Data.FlexData
         public FlexColumnDefinitionCollection ParentCollection { get; internal set; }
 
         /// <summary>
-        /// A tag that can be applied to the column by the application. Not used internally.
-        /// </summary>
-        //public object Tag { get; set; }
-
-        //private GUISettings.ViewModel.GUIElementGroupAssignmentViewModel assignedGuiElement;
-        //private GUISettings.ViewModel.GUIElementBaseViewModel guiElement;
-
-        ///// <summary>
-        ///// Gets or sets the assigned GUI element with its group specific settings.
-        ///// </summary>
-        //public GUISettings.ViewModel.GUIElementGroupAssignmentViewModel AssignedGuiElement 
-        //{
-        //    get { return this.assignedGuiElement; }
-        //    set
-        //    {
-        //        this.assignedGuiElement = value;
-        //        this.guiElement = value.GetAssignedBaseElement();
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Gets or sets the GUI element (independent of any group specific settings).
-        ///// </summary>
-        //public GUISettings.ViewModel.GUIElementBaseViewModel GuiElement 
-        //{
-        //    get { return this.guiElement; }
-        //    set { this.guiElement = value; }
-        //}
-
-        /// <summary>
         /// Changes the type of the column.
         /// </summary>
         /// <param name="newType">The new type.</param>
@@ -98,5 +68,7 @@ namespace WPFCore.Data.FlexData
         {
             this.ColumnType = newType;
         }
+
+        public ColumnPropertyDescriptor ColumnPropertyDescriptor { get; internal set; }
     }
 }

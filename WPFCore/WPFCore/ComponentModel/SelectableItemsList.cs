@@ -76,17 +76,36 @@ namespace WPFCore.ComponentModel
             this.isInitializing = false;
         }
 
+        public void SelectAllSilently()
+        {
+            this.ForEach(itm => itm.SetIsSelectedSilently(true));
+        }
+
+        public void DeselectAllSilently()
+        {
+            this.ForEach(itm => itm.SetIsSelectedSilently(false));
+        }
+
         private void Item_SelectionStateChanged(object sender, EventArgs e)
         {
             if (this.isInitializing) return;
 
             this.OnPropertyChanged("HasSelectedItems");
             this.SelectionChanged?.Invoke(this, new EventArgs());
+
+            var item = (Selectable<T>)sender;
+            if (item.IsSelected)
+                this.ItemSelected?.Invoke(this, item.Item);
+            else
+                this.ItemDeselected?.Invoke(this, item.Item);
         }
 
         private void OnPropertyChanged(string propertyName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public event EventHandler<T> ItemSelected;
+        public event EventHandler<T> ItemDeselected;
     }
 }

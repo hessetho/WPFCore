@@ -11,6 +11,9 @@ namespace WPFCore.ComponentModel
     public class ObservableSelectionList<T> : ObservableCollection<Selectable<T>>
         where T : IUserFriendly
     {
+        /// <summary>
+        /// Is raised if any item's selection status changes
+        /// </summary>
         public event EventHandler SelectionChanged;
 
         public ObservableSelectionList()
@@ -26,6 +29,16 @@ namespace WPFCore.ComponentModel
         public bool HasSelectedItems
         {
             get { return this.Any(i => i.IsSelected); }
+        }
+
+        public bool AreAllSelected()
+        {
+            return this.All(i => i.IsSelected);
+        }
+
+        public bool IsNoneSelected()
+        {
+            return !this.Any(i => i.IsSelected);
         }
 
         public new void Add(Selectable<T> item)
@@ -45,10 +58,37 @@ namespace WPFCore.ComponentModel
                 this.Add(item);
         }
 
+        public void Remove(T item)
+        {
+            var selectable = Find(item);
+            base.Remove(selectable);
+        }
+
         public new void Remove(Selectable<T> item)
         {
             item.SelectionStateChanged -= Item_SelectionStateChanged;
             base.Remove(item);
+        }
+
+        public void SelectAll()
+        {
+            foreach (var selectable in this)
+                selectable.IsSelected = true;
+        }
+
+        public void DeselectAll()
+        {
+            foreach (var selectable in this)
+                selectable.IsSelected = false;
+        }
+
+        private Selectable<T> Find(T item)
+        {
+            foreach (var selectable in this)
+                if (selectable.Item.Equals(item))
+                    return selectable;
+
+            return null;
         }
 
         /// <summary>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-12-894474890
+91011230087
 21745313379
-167-1152931443
+1811618749149
 152064204511
-themes\DateRangeSelectorDefaultStyle.xaml;themes\ExceptionGalleryDefaultStyle.xaml;themes\generic.xaml;themes\InputFilenameDefaultStyle.xaml;themes\MonthViewDefaultStyle.xaml;XAML\(Internal)\InputTextBoxWindow.xaml;XAML\Styles\Brushes.xaml;XAML\Styles\CoreStyles.xaml;XAML\Styles\DataGridStyleDictionary.xaml;XAML\Styles\OtherStyleDictionary.xaml;XAML\Styles\ValidationStyles.xaml;XAML\Styles\Win7Styles.xaml;
+themes\DateRangeSelectorDefaultStyle.xaml;themes\ExceptionGalleryDefaultStyle.xaml;themes\generic.xaml;themes\WPCTextBoxDefaultStyle.xaml;themes\InputFilenameDefaultStyle.xaml;themes\MonthViewDefaultStyle.xaml;XAML\(Internal)\InputTextBoxWindow.xaml;XAML\Styles\CoreStyles.xaml;XAML\Styles\DataGridStyleDictionary.xaml;
 
-False
+True
 

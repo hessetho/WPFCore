@@ -21,17 +21,17 @@ namespace WPFCore.Diagnostics
 
         public void AddSystemTraces()
         {
-            this.ListenToTraceSource(PresentationTraceSources.AnimationSource);
+            //this.ListenToTraceSource(PresentationTraceSources.AnimationSource);
             this.ListenToTraceSource(PresentationTraceSources.DataBindingSource);
-            this.ListenToTraceSource(PresentationTraceSources.DependencyPropertySource);
-            this.ListenToTraceSource(PresentationTraceSources.DocumentsSource);
-            this.ListenToTraceSource(PresentationTraceSources.FreezableSource);
-            this.ListenToTraceSource(PresentationTraceSources.HwndHostSource);
-            this.ListenToTraceSource(PresentationTraceSources.MarkupSource);
-            this.ListenToTraceSource(PresentationTraceSources.NameScopeSource);
-            this.ListenToTraceSource(PresentationTraceSources.ResourceDictionarySource);
-            this.ListenToTraceSource(PresentationTraceSources.RoutedEventSource);
-            this.ListenToTraceSource(PresentationTraceSources.ShellSource);
+            //this.ListenToTraceSource(PresentationTraceSources.DependencyPropertySource);
+            //this.ListenToTraceSource(PresentationTraceSources.DocumentsSource);
+            //this.ListenToTraceSource(PresentationTraceSources.FreezableSource);
+            //this.ListenToTraceSource(PresentationTraceSources.HwndHostSource);
+            //this.ListenToTraceSource(PresentationTraceSources.MarkupSource);
+            //this.ListenToTraceSource(PresentationTraceSources.NameScopeSource);
+            //this.ListenToTraceSource(PresentationTraceSources.ResourceDictionarySource);
+            //this.ListenToTraceSource(PresentationTraceSources.RoutedEventSource);
+            //this.ListenToTraceSource(PresentationTraceSources.ShellSource);
         }
 
         public List<TraceSource> TraceSources

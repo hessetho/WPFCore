@@ -459,7 +459,7 @@ namespace WPFCore.Data.FlexData
         [Conditional("DEBUG")]
         public void DumpProperties()
         {
-            foreach (ColumnPropertyDescriptor pd in this.propertyDescriptors)
+            foreach (PropertyDescriptor pd in this.propertyDescriptors)
             {
                 Debug.WriteLine(string.Format("{0}: {1} ({2})", pd.Name, pd.DisplayName, pd.PropertyType));
             }

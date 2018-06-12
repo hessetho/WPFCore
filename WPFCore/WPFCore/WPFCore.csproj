@@ -58,6 +58,10 @@
     <Compile Include="Data\%28internal%29\PropertyComparerCollection.cs" />
     <Compile Include="Data\CalendarAppointment.cs" />
     <Compile Include="Data\CalendarDay.cs" />
+    <Compile Include="Data\Charting\ChartDataPoint.cs" />
+    <Compile Include="Data\Charting\ChartDataPointList.cs" />
+    <Compile Include="Data\Charting\DPPropertyDescriptor.cs" />
+    <Compile Include="Data\Charting\MMAValue.cs" />
     <Compile Include="Data\DateRange.cs" />
     <Compile Include="Data\DateRanges.cs" />
     <Compile Include="Data\DateRangeType.cs" />
@@ -112,8 +116,10 @@
     <Compile Include="Helper\NumberHelper.cs" />
     <Compile Include="Helper\ReflectionHelper.cs" />
     <Compile Include="Helper\IDataReaderExtensions.cs" />
+    <Compile Include="Helper\StopWatch.cs" />
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Helper\StringValidCharactersAttribute.cs" />
+    <Compile Include="Helper\TaggingHelper.cs" />
     <Compile Include="Helper\ThreadStarter.cs" />
     <Compile Include="Helper\Toolbox.cs" />
     <Compile Include="Helper\TraceHelper.cs" />
@@ -140,6 +146,7 @@
     <Compile Include="ViewModelSupport\CollectionViewModelBase.cs" />
     <Compile Include="ViewModelSupport\DialogService.cs" />
     <Compile Include="ViewModelSupport\DialogServiceExt.cs" />
+    <Compile Include="ViewModelSupport\DictionaryViewModelBase.cs" />
     <Compile Include="ViewModelSupport\DoesNotAffectChangesFlag.cs" />
     <Compile Include="ViewModelSupport\DontTraceMeAttribute.cs" />
     <Compile Include="ViewModelSupport\IDialogSupport.cs" />
@@ -178,6 +185,8 @@
     <Compile Include="XAML\Controls\InputFilename.cs" />
     <Compile Include="XAML\Controls\InputTextBox.cs" />
     <Compile Include="XAML\Controls\MonthView.cs" />
+    <Compile Include="XAML\Controls\ShowCapsLock.cs" />
+    <Compile Include="XAML\Controls\WPCTextBox.cs" />
     <Compile Include="XAML\Converter\BoolInverterConverter.cs" />
     <Compile Include="XAML\Converter\BoolToItalicConverter.cs" />
     <Compile Include="XAML\Converter\BoolToStyleConverter.cs" />
@@ -202,6 +211,7 @@
     <Compile Include="XAML\DragDrop\IDragSourceAdvisor.cs" />
     <Compile Include="XAML\DragDrop\IDropTargetAdvisor.cs" />
     <Compile Include="XAML\EnumerationMarkupExtension.cs" />
+    <Compile Include="XAML\FlowDocumentLoader.cs" />
     <Compile Include="XAML\GridLengthAnimation.cs" />
     <Compile Include="XAML\GridViewSort.cs" />
     <Compile Include="XAML\ListViewExtensions.cs" />
@@ -222,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SqlClient\readme.txt" />
+    <Resource Include="Icons\Kreuz_16x16.png" />
     <Content Include="XAML\readme.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="themes\WPCTextBoxDefaultStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="themes\InputFilenameDefaultStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -249,27 +264,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="XAML\Styles\Brushes.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="XAML\Styles\CoreStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="XAML\Styles\DataGridStyleDictionary.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="XAML\Styles\OtherStyleDictionary.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="XAML\Styles\ValidationStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="XAML\Styles\Win7Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -167,6 +167,14 @@ namespace WPFCore.Helper
 
             bmpCopied.Render(dv);
             Clipboard.SetImage(bmpCopied);
-        }    
+        }
+
+#if DEBUG
+        public static void DumpResources(Assembly assembly)
+        {
+            foreach (var name in assembly.GetManifestResourceNames())
+                Debug.WriteLine(name);
+        }
+#endif
     }
 }

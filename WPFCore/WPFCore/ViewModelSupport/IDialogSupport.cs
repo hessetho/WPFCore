@@ -19,5 +19,7 @@ namespace WPFCore.ViewModelSupport
         void HandleCancellableEvent(CancelEventArgs e);
 
         string WindowTitle { get; }
+
+        bool SupportsRejection { get; }
     }
 }

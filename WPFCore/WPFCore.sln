@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFCoreTest", "WPFCoreTest\WPFCoreTest.csproj", "{ACCE6FE8-2CE4-4EB4-BF87-37BC007F189C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFCore", "WPFCore\WPFCore.csproj", "{7083B616-F553-4F74-84B6-E1BE0F79F8F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFCore.Security", "WPFCore.Security\WPFCore.Security.csproj", "{FD407DFD-C45C-4C78-9A00-939543FCB2BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFCore.MySql", "WPFCore.MySql\WPFCore.MySql.csproj", "{0678DCAB-871E-4D4A-89CA-6D921247152C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,8 +29,15 @@ Global
 		{FD407DFD-C45C-4C78-9A00-939543FCB2BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD407DFD-C45C-4C78-9A00-939543FCB2BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD407DFD-C45C-4C78-9A00-939543FCB2BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0678DCAB-871E-4D4A-89CA-6D921247152C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0678DCAB-871E-4D4A-89CA-6D921247152C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0678DCAB-871E-4D4A-89CA-6D921247152C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0678DCAB-871E-4D4A-89CA-6D921247152C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67681257-1D4F-46E5-A887-7CF74AE3D2F7}
 	EndGlobalSection
 EndGlobal

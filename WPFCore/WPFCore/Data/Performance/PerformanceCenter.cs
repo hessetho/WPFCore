@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace WPFCore.Data.Performance
 {
@@ -45,6 +46,13 @@ namespace WPFCore.Data.Performance
         public static PerformanceCollector GetInternalCollector()
         {
             return collector;
+        }
+
+        public static void Dump()
+        {
+            foreach(var c in collector.PerformanceCategories)
+                foreach (var n in c.Value)
+                    Debug.WriteLine(string.Format("{0}\t{1}\t{2}", c.Key, n.ItemName, n.LatestDuration));
         }
     }
 }

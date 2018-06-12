@@ -22,7 +22,7 @@ namespace WPFCore.ComponentModel
         event EventHandler SelectionStateChanged;
 
         /// <summary>
-        /// Liefert diese Instanz. Bei generischen Objekten, die <c>ISelectable</c> implementieren wird das eigentiliche Objekt geliefert.
+        /// Liefert diese Instanz. Bei generischen Objekten, die <c>ISelectable</c> implementieren wird das eigentliche Objekt geliefert.
         /// </summary>
         object SelectedItem { get; }
     }

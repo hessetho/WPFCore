@@ -15,6 +15,8 @@
         <ResourceDictionary Source="/WPFCore;component/themes/ExceptionGalleryDefaultStyle.xaml"/>
         <ResourceDictionary Source="/WPFCore;component/themes/DateRangeSelectorDefaultStyle.xaml"/>
         <ResourceDictionary Source="/WPFCore;component/themes/MonthViewDefaultStyle.xaml"/>
+
+        <ResourceDictionary Source="/WPFCore;component/themes/WPCTextBoxDefaultStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

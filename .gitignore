@@ -1,8 +1,23 @@
-*.lref
-*.cache
-*.baml
-# ignore any obj folders
+WPFCore/.vs
+
+# ignore any bin & obj folders
 WPFCore/WPFCore/obj/
+WPFCore/WPFCore/bin/
+
+WPFCore/WPFCore.MySql/obj/
+WPFCore/WPFCore.MySql/bin/
+
+WPFCore/WPFCore.Security/obj/
+WPFCore/WPFCore.Security/bin/
+
+WPFCore/WPFCoreTest/obj/
+WPFCore/WPFCoreTest/bin/
+
 *.dll
 *.pdb
 *.cache
+*.suo
+*.pdb
+*.lref
+*.cache
+*.baml

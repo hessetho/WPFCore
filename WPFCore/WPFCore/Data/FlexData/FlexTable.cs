@@ -136,6 +136,7 @@ namespace WPFCore.Data.FlexData
             var cpd = new ColumnPropertyDescriptor(column.ColumnPropertyName, column.ColumnTitle, column.ColumnType,
                 PivotColumnType.NonPivotColumn, column.SourcePropertyName);
             this.columnDescriptors.Add(cpd);
+            column.ColumnPropertyDescriptor = cpd;
 
             // add the new column to all existing rows of this collection
             foreach (var row in this)

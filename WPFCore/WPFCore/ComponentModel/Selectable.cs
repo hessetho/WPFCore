@@ -66,5 +66,13 @@ namespace WPFCore.ComponentModel
         /// Ereignis tritt ein, wenn sich der Auswhalzustand der Instanz ändert.
         /// </summary>
         public event EventHandler SelectionStateChanged;
+
+        internal void SetIsSelectedSilently(bool isSelected)
+        {
+            if (this.isSelected == isSelected) return;
+
+            this.isSelected = isSelected;
+            base.OnPropertyChanged("IsSelected");
+        }
     }
 }

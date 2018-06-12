@@ -28,6 +28,12 @@ namespace WPFCore.Helper
                 return reader[index];
         }
 
+        public static object GetObjectNullable(this IDataReader reader, string columnName)
+        {
+            var index = reader.GetOrdinal(columnName);
+            return reader.GetObjectNullable(index);
+        }
+
         #region GetString extensions
         public static string GetString(this IDataReader reader, string columnName)
         {
@@ -175,7 +181,9 @@ namespace WPFCore.Helper
 
         public static DateTime? GetDateTimeNullable(this IDataReader reader, int index)
         {
-            return GetDateTimeNullable(reader, index, null);
+            if (reader.IsDBNull(index))
+                return null;
+            return reader.GetDateTime(index);
         }
 
         public static DateTime? GetDateTimeNullable(this IDataReader reader, string columnName)
@@ -184,17 +192,17 @@ namespace WPFCore.Helper
             return reader.GetDateTimeNullable(index);
         }
 
-        public static DateTime? GetDateTimeNullable(this IDataReader reader, int index, DateTime? defaultValue)
+        public static DateTime GetDateTime(this IDataReader reader, int index, DateTime defaultValue)
         {
             if (reader.IsDBNull(index))
                 return defaultValue;
             return reader.GetDateTime(index);
         }
 
-        public static DateTime? GetDateTimeNullable(this IDataReader reader, string columnName, DateTime? defaultValue)
+        public static DateTime GetDateTime(this IDataReader reader, string columnName, DateTime defaultValue)
         {
             var index = reader.GetOrdinal(columnName);
-            return GetDateTimeNullable(reader, index, defaultValue);
+            return GetDateTime(reader, index, defaultValue);
         }
 
         #endregion GetDateTime extensions

@@ -44,25 +44,23 @@ namespace WPFCore.Helper
 
         public static void InvokeIfRequired(Dispatcher dispatcher, DispatcherPriority priority, Action methodCall)
         {
-            // we'll not switch the context if the current thread is being aborted
-            //if ((Thread.CurrentThread.ThreadState & System.Threading.ThreadState.AbortRequested) == System.Threading.ThreadState.AbortRequested)
-            //{
-            //    TraceHelper.TraceWarning(string.Format("InvokeIfRequired cannot execute methodCall for thread '{0}'. Current thread ('{1}') is in state '{2}'.", dispatcher.Thread.Name, Thread.CurrentThread.Name, Thread.CurrentThread.ThreadState));
-            //    return;
-            //}
-
-#if DEBUG
-            if (dispatcher.Thread.ThreadState.IsFlagSet(System.Threading.ThreadState.Stopped))
+            if (dispatcher.CheckAccess())
+                methodCall();
+            else
             {
-                Debug.WriteLine(string.Format("DispatcherHelper.InvokeIfRequired(): WARNING! My owning thread is stopped! {0}",dispatcher.Thread.Name));
-                return;
-            }
+#if DEBUG && DEBUGTHREADS
+                Debug.WriteLine(string.Format("DispatcherHelper\r\n\tCurrent dispatcher: ({3}) \"{4}\"\r\n\tTarget dispatcher: ({1}) \"{2}\": {0}", dispatcher.Thread.ThreadState, dispatcher.Thread.ManagedThreadId, dispatcher.Thread.Name, Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.Name));
+                
+                if(Application.Current==null || Application.Current.Dispatcher.HasShutdownStarted)
+                    Debug.WriteLine("DispatcherHelper.InvokeIfRequired(): WARNING! Application is shutting down!");
+
+                if (Application.Current != null && Application.Current.Dispatcher.Thread.ThreadState.IsFlagSet(System.Threading.ThreadState.Stopped))
+                    Debug.WriteLine(string.Format("DispatcherHelper.InvokeIfRequired(): WARNING! Application thread is stopped! ({0})", Application.Current.Dispatcher.Thread.Name));
 #endif
 
-            if (dispatcher.Thread != Thread.CurrentThread)
                 dispatcher.Invoke(priority, methodCall);
-            else
-                methodCall();
+            }
+
         }
 
         public static void InvokeIfRequired(Dispatcher dispatcher, DispatcherPriority priority, Action methodCall, TimeSpan timeout)

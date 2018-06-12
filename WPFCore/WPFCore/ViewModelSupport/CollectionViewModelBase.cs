@@ -266,7 +266,7 @@ namespace WPFCore.ViewModelSupport
 
             InvokeOnAppDispatcher(() =>
             {
-                this.FireCollectionChanged(NotifyCollectionChangedAction.Add, item);
+                //this.FireCollectionChanged(NotifyCollectionChangedAction.Add, item);
                 this.observableCollection.Add(item);
 
                 if(this.IsInitialized)
@@ -278,7 +278,7 @@ namespace WPFCore.ViewModelSupport
         {
             ((ViewModelBase)item).HasChanged += this.CollectionItemHasChanged;
 
-            this.FireCollectionChanged(NotifyCollectionChangedAction.Add, item);
+            //this.FireCollectionChanged(NotifyCollectionChangedAction.Add, item);
             this.observableCollection.Add(item);
 
             if (this.IsInitialized)
@@ -293,8 +293,7 @@ namespace WPFCore.ViewModelSupport
         /// <param name="e">The <see cref="string"/> instance containing the event data.</param>
         private void CollectionItemHasChanged(object sender, string e)
         {
-            if (this.ItemChanged != null)
-                this.ItemChanged(this, (T)sender);
+            this.ItemChanged?.Invoke(this, (T)sender);
 
             this.SetChangeFlag();
         }
@@ -313,7 +312,7 @@ namespace WPFCore.ViewModelSupport
                 this.ignoreCurrentChange = true;
                     // suppress the handling of the CurrentChanging event of the ICollectionView
 
-                this.FireCollectionChanged(NotifyCollectionChangedAction.Remove, item);
+                //this.FireCollectionChanged(NotifyCollectionChangedAction.Remove, item);
                 this.observableCollection.Remove(item);
                 this.Refresh();
 
@@ -499,8 +498,7 @@ namespace WPFCore.ViewModelSupport
         /// <param name="item">The affected item</param>
         protected void FireCollectionChanged(NotifyCollectionChangedAction action, object item)
         {
-            if (this.CollectionChanged != null)
-                this.CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, item));
+            this.CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, item));
         }
 
         /// <summary>

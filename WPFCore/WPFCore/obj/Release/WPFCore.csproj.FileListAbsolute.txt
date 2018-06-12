@@ -39,3 +39,4 @@ E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Release\XAML\Styles\ValidationSt
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Release\WPFCore.g.resources
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Release\WPFCore.dll
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Release\WPFCore.pdb
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Release\WPFCore.csproj.CoreCompileInputs.cache

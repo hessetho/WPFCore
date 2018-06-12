@@ -86,7 +86,9 @@ namespace WPFCoreTest
 
         private void ReadData()
         {
-            this.Rows = this.reader.DoReadData(this.fileName);
+            var result = this.reader.DoReadData(this.fileName);
+
+            this.Rows = result.Rows;
         }
 
         private bool CanReadData()
