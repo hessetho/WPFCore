@@ -21,21 +21,21 @@ namespace WPFCore.ViewModelSupport
     public abstract class ViewModelBase : INotifyPropertyChanged, ISupportInitializeNotification
     {
         // Thread synchronisation object
-        protected object LockObj = new object();
+        protected readonly object LockObj = new object();
 
         // stores the objects dispatcher
         protected readonly Dispatcher MyDispatcher = Dispatcher.CurrentDispatcher;
 
         /// <summary>
-        ///     List of properties which are decorated with the <see cref="DoesNotAffectChangesFlagAttribute" />
+        /// List of properties which are decorated with the <see cref="DoesNotAffectChangesFlagAttribute" />
         /// </summary>
-        protected readonly List<string> PropertiesDoNotAffectChangesFlag;
+        private static Dictionary<Type, List<string>> PropertiesOfTypeDoNotAffectChangesFlag;
 
         /// <summary>
         ///     Indictor to suppress tracing for the current object.
         /// This is set be decorating the class with the <see cref="DontTraceMeAttribute"/>
         /// </summary>
-        private readonly bool dontTraceMe;
+        private readonly bool? dontTraceMe;
 
         /// <summary>
         /// Represents the <see cref="TraceSource"/> to use for tracing. This is set to
@@ -43,6 +43,13 @@ namespace WPFCore.ViewModelSupport
         /// value for fine grained trace filtering.
         /// </summary>
         protected TraceSource MyTraceSource { get; set; }
+
+        static ViewModelBase()
+        {
+            PropertiesOfTypeDoNotAffectChangesFlag = new Dictionary<Type, List<string>>();
+        }
+
+        private static object staticLockObj = new object();
 
         /// <summary>
         ///     Constructor.
@@ -54,13 +61,41 @@ namespace WPFCore.ViewModelSupport
         [DebuggerStepThrough]
         public ViewModelBase()
         {
-            this.PropertiesDoNotAffectChangesFlag = this.GetType()
-                .GetProperties()
-                .Where(p => GetDoesNotAffectChangesFlag(p).Length != 0)
-                .Select(p => p.Name)
-                .ToList();
+            // need to use a static object for lock synchronisation here - otherwise we're risking race conditions
+            lock (staticLockObj)
+            {
+                var t = this.GetType();
+                // collect all properties decorated with the [DoesNotAffectChanges] attribute
+                // we do it only once for each derived class!
+                if (!PropertiesOfTypeDoNotAffectChangesFlag.ContainsKey(t))
+                {
+                    //Debug.WriteLine("{0} - ViewModelBase: registering properties for {1}", DateTime.Now, (object)this.GetType().Name);
+                    try
+                    {
+                        PropertiesOfTypeDoNotAffectChangesFlag.Add(t, t
+                            .GetProperties()
+                            .Where(p => GetDoesNotAffectChangesFlag(p).Length != 0)
+                            .Select(p => p.Name)
+                            .ToList());
 
-            this.dontTraceMe = this.GetType().GetCustomAttributes(typeof (DontTraceMeAttribute), true).Count()!=0;
+                        // force the list to contain the "HasChanges" property.
+                        if (!PropertiesOfTypeDoNotAffectChangesFlag[t].Contains("HasChanges"))
+                            PropertiesOfTypeDoNotAffectChangesFlag[t].Add("HasChanges");
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.WriteLine(e.Message);
+                        e.AddData("Class", t.Name);
+                        if (e is ArgumentException)
+                            throw new NonFatalException(e);
+                        else
+                            throw;
+                    }
+                }
+
+                if (!dontTraceMe.HasValue)
+                    dontTraceMe = GetType().GetCustomAttributes(typeof(DontTraceMeAttribute), true).Count() != 0;
+            }
 
             this.MyTraceSource = Constants.CoreTraceSource;
         }
@@ -73,9 +108,25 @@ namespace WPFCore.ViewModelSupport
         /// <summary>
         ///     Occurs when any property value changed.
         /// </summary>
-        //public event HasChangedEventHandler HasChanged;
-
         public event EventHandler<string> HasChanged;
+
+        /// <summary>
+        /// Occurs when the instance's change flag got resetted to <c>False</c>.
+        /// </summary>
+        public event EventHandler ChangeFlagResetted;
+
+
+        /// <summary>
+        /// List of properties which are decorated with the <see cref="DoesNotAffectChangesFlagAttribute" />
+        /// </summary>
+        protected List<string> PropertiesDoNotAffectChangesFlag
+        {
+            [DebuggerStepThrough]
+            get
+            {
+                return PropertiesOfTypeDoNotAffectChangesFlag[this.GetType()];
+            }
+        }
 
         /// <summary>
         ///     Helper to retrieve the <see cref="DoesNotAffectChangesFlagAttribute" /> for a
@@ -149,8 +200,10 @@ namespace WPFCore.ViewModelSupport
             {
                 this.LastChangedProperty = propertyName;
 
-                if(!string.IsNullOrEmpty(propertyName))
-                    this.HasChanges = true;
+                // because an empty string is used to force a refresh of the bound elements on the GUI
+                // we will not set the "HasChanges" flag
+                if (!string.IsNullOrEmpty(propertyName))
+                    HasChangesSetter(true);
             }
 
             this.FirePropertyChanged(propertyName);
@@ -287,14 +340,15 @@ namespace WPFCore.ViewModelSupport
         /// <seealso cref="IsInitialized"/>
         /// <seealso cref="IsInitializing"/>
         /// <seealso cref="HasChanges"/>
-        //[DebuggerStepThrough]
+        [DebuggerStepThrough]
         public void BeginInit()
         {
-            Monitor.Enter(this.lockObj);
-            this.initCount++;
-            this.IsInitializing = true;
-            this.IsInitialized = false;
-            Monitor.Exit(this.lockObj);
+            lock (this.lockObj)
+            {
+                this.initCount++;
+                this.IsInitializing = true;
+                this.IsInitialized = false;
+            }
         }
 
         /// <summary>
@@ -321,22 +375,28 @@ namespace WPFCore.ViewModelSupport
         /// <seealso cref="IsInitialized"/>
         /// <seealso cref="IsInitializing"/>
         /// <seealso cref="HasChanges"/>
-        //[DebuggerStepThrough]
+        [DebuggerStepThrough]
         public void EndInit()
         {
-            Monitor.Enter(this.lockObj);
-            this.initCount--;
-            if (this.initCount == 0)
+            var initDone = false;
+
+            lock (this.lockObj)
             {
-                this.IsInitializing = false;
-                this.IsInitialized = true;
-                this.OnInitialized();
-            }
+                this.initCount--;
+                if (this.initCount == 0)
+                {
+                    this.IsInitializing = false;
+                    this.IsInitialized = true;
+                    initDone = true;
+                }
 #if DEBUG
-            if (this.initCount < 0)
-                DiagnosticsHelper.WriteLine(string.Format("WARNING: initCount falls below 0 for {0}", this.GetType().Name));
+                if (this.initCount < 0)
+                    DiagnosticsHelper.WriteLine(string.Format("WARNING: initCount falls below 0 for {0}", this.GetType().Name));
 #endif
-            Monitor.Exit(this.lockObj);
+            }
+
+            if (initDone)
+                this.OnInitialized();
         }
 
         /// <summary>
@@ -347,12 +407,7 @@ namespace WPFCore.ViewModelSupport
         /// </remarks>
         protected void OnInitialized()
         {
-            if (this.Initialized != null)
-                // ensure that this event occurs on the thread that created this instance
-                this.InvokeIfRequired(() =>
-                {
-                    this.Initialized(this, new EventArgs());
-                });
+            this.Initialized?.Invoke(this, new EventArgs());
         }
 
         #endregion ISupportInitialize, ISupportInitializeNotification
@@ -367,27 +422,49 @@ namespace WPFCore.ViewModelSupport
         /// </summary>
         [DoesNotAffectChangesFlag]
         [XmlIgnore]
-        public bool HasChanges
+        public virtual bool HasChanges
         {
             get { return this.hasChanges; }
-            private set
+            //private set
+            //{
+            //    this.hasChanges = value;
+            //    this.OnPropertyChanged("HasChanges");
+
+            //    if (!this.dontTraceMe && this.hasChanges)
+            //    {
+            //        // note: derived classes which do not implement ITraceInformationProvider should override ToString() to return a meaningful item description
+            //        var itemDescription = this.ToString();
+            //        if (this is ITraceInformationProvider)
+            //            itemDescription = ((ITraceInformationProvider)this).ItemDescription;
+
+            //        this.MyTraceSource.TraceDebug(string.Format("[{0} ({1})] changed \"{2}\"", this.GetType().Name, itemDescription, this.LastChangedProperty));
+            //    }
+
+            //    if (this.hasChanges && this.HasChanged != null)
+            //        this.HasChanged(this, this.LastChangedProperty);
+            //}
+        }
+
+        private void HasChangesSetter(bool value)
+        {
+            this.hasChanges = value;
+            this.OnPropertyChanged("HasChanges");
+
+            if (this.hasChanges && dontTraceMe == false)
             {
-                this.hasChanges = value;
-                this.OnPropertyChanged("HasChanges");
+                // note: derived classes which do not implement ITraceInformationProvider should override ToString() to return a meaningful item description
+                var itemDescription = this.ToString();
+                if (this is ITraceInformationProvider)
+                    itemDescription = ((ITraceInformationProvider)this).ItemDescription;
 
-                if (!this.dontTraceMe && this.hasChanges)
-                {
-                    // note: derived classes which do not implement ITraceInformationProvider should override ToString() to return a meaningful item description
-                    var itemDescription = this.ToString();
-                    if (this is ITraceInformationProvider)
-                        itemDescription = ((ITraceInformationProvider)this).ItemDescription;
-
-                    this.MyTraceSource.TraceDebug(string.Format("[{0} ({1})] changed \"{2}\"", this.GetType().Name, itemDescription, this.LastChangedProperty));
-                }
-
-                if (this.hasChanges && this.HasChanged != null)
-                    this.HasChanged(this, this.LastChangedProperty);
+                //this.MyTraceSource.TraceDebug(string.Format("[{0} ({1})] changed \"{2}\"", GetType().Name, itemDescription, this.LastChangedProperty));
+                Debug.WriteLine(string.Format("[{0} ({1})] changed \"{2}\"", GetType().Name, itemDescription, this.LastChangedProperty));
             }
+
+            if (this.hasChanges)
+                this.HasChanged?.Invoke(this, this.LastChangedProperty);
+            else
+                this.ChangeFlagResetted?.Invoke(this, new EventArgs());
         }
 
         /// <summary>
@@ -396,7 +473,7 @@ namespace WPFCore.ViewModelSupport
         public void SetChangeFlag()
         {
             this.LastChangedProperty = "unknown (flag forced)";
-            this.HasChanges = true;
+            HasChangesSetter(true);
         }
 
         /// <summary>
@@ -405,7 +482,7 @@ namespace WPFCore.ViewModelSupport
         public void SetChangeFlag(string propertyName)
         {
             this.LastChangedProperty = string.Format("{0} (flag forced)", propertyName);
-            this.HasChanges = true;
+            HasChangesSetter(true);
         }
 
         /// <summary>
@@ -415,9 +492,9 @@ namespace WPFCore.ViewModelSupport
         {
             if (this.HasChanges == false) return;
 
-            this.HasChanges = false;
+            HasChangesSetter(false);
 
-            if (!this.dontTraceMe)
+            if (this.dontTraceMe == false)
                 this.MyTraceSource.TraceDebug(string.Format("[{0} ({1})] reset change flag", this.GetType().Name, this)); // note: derived classes should override ToString()
         }
 

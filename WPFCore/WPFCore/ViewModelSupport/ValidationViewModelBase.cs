@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace WPFCore.ViewModelSupport
@@ -128,7 +129,7 @@ namespace WPFCore.ViewModelSupport
 
         private readonly List<string> ignoreList = new List<string> { "IsValid", "Error", "IsInitializing", "IsInitialized" };
 
-        protected override void OnPropertyChanged(string propertyName)
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             // validate this instance first (unless initializing, ignore IsValid itself)
             if(IsInitialized && !this.ignoreList.Contains(propertyName))
@@ -161,7 +162,7 @@ namespace WPFCore.ViewModelSupport
         /// <summary>
         ///     Initialize validation flag
         /// </summary>
-        protected internal void Validate()
+        public void Validate()
         {
             Debug.Assert(this.IsInitializing == false, "WARNING! Validate should NOT be called while IsInitialized is True. Call EndInit() prior.");
 

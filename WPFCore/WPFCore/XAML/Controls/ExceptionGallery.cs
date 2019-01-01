@@ -310,6 +310,11 @@ namespace WPFCore.XAML.Controls
                     details.AppendLine(string.Format("State: {0}", error.State));
                 }
             }
+            else if(e is ArgumentException)
+            {
+                var ae = (ArgumentException)e;
+                details.AppendLine(string.Format("Parameter name: {0}", string.IsNullOrEmpty(ae.ParamName) ? "<null>" : ae.ParamName));
+            }
 
             return details.ToString();
         }

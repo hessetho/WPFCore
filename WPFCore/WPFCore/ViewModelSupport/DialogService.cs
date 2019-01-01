@@ -13,17 +13,10 @@ namespace WPFCore.ViewModelSupport
             OpenWindowDelegate openWindowCallback)
         {
             if (DialogService.openWindowCallback != null)
-            {
-                throw new InvalidOperationException(
-                    "it is not allowed to call DialogService.RegisterCallbacks() again, after DialogService was already initialized.");
-            }
-            if (openDialogCallback == null)
-                throw new ArgumentNullException("openDialogCallback");
-            if (openWindowCallback == null)
-                throw new ArgumentNullException("openWindowCallback");
+                throw new InvalidOperationException("it is not allowed to call DialogService.RegisterCallbacks() again, after DialogService was already initialized.");
 
-            DialogService.openDialogCallback = openDialogCallback;
-            DialogService.openWindowCallback = openWindowCallback;
+            DialogService.openDialogCallback = openDialogCallback ?? throw new ArgumentNullException("openDialogCallback");
+            DialogService.openWindowCallback = openWindowCallback ?? throw new ArgumentNullException("openWindowCallback");
         }
 
         /// <summary>
@@ -34,10 +27,7 @@ namespace WPFCore.ViewModelSupport
         public static void OpenWindow(ContentControl contentControl, string title)
         {
             if (openWindowCallback == null)
-            {
-                throw new InvalidOperationException(
-                    "Use DialogService.RegisterCallbacks() to initialize the DialogService");
-            }
+                throw new InvalidOperationException("Use DialogService.RegisterCallbacks() to initialize the DialogService");
 
             openWindowCallback(contentControl, title);
         }
@@ -49,11 +39,8 @@ namespace WPFCore.ViewModelSupport
         /// <returns></returns>
         public static bool OpenDialog(ContentControl contentControl, string title)
         {
-            if (openWindowCallback == null)
-            {
-                throw new InvalidOperationException(
-                    "Use DialogService.RegisterCallbacks() to initialize the DialogService");
-            }
+            if (openDialogCallback == null)
+                throw new InvalidOperationException("Use DialogService.RegisterCallbacks() to initialize the DialogService");
 
             return openDialogCallback(contentControl, title);
         }

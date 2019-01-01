@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -16,15 +17,15 @@ namespace WPFCore.Helper
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="withFlags"></param>
+        [DebuggerStepThrough]
         private static void CheckIsEnum<T>(bool withFlags)
         {
             if (!typeof(T).IsEnum)
                 throw new ArgumentException(string.Format("Type '{0}' is not an enum", typeof(T).FullName));
+
             if (withFlags && !Attribute.IsDefined(typeof(T), typeof(FlagsAttribute)))
-            {
                 throw new ArgumentException(string.Format("Type '{0}' doesn't have the 'Flags' attribute",
                                                           typeof(T).FullName));
-            }
         }
 
         /// <summary>
@@ -34,6 +35,7 @@ namespace WPFCore.Helper
         /// <param name="flag"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [DebuggerStepThrough]
         public static bool IsFlagSet<T>(this T value, T flag) where T : struct
         {
             CheckIsEnum<T>(true);
@@ -48,6 +50,7 @@ namespace WPFCore.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
+        [DebuggerStepThrough]
         public static IEnumerable<T> GetFlags<T>(this T value) where T : struct
         {
             CheckIsEnum<T>(true);
@@ -62,6 +65,7 @@ namespace WPFCore.Helper
         /// <param name="flags"></param>
         /// <param name="on"></param>
         /// <returns></returns>
+        [DebuggerStepThrough]
         public static T SetFlags<T>(this T value, T flags, bool on) where T : struct
         {
             CheckIsEnum<T>(true);
@@ -81,6 +85,7 @@ namespace WPFCore.Helper
         /// <param name="value"></param>
         /// <param name="flags"></param>
         /// <returns></returns>
+        [DebuggerStepThrough]
         public static T SetFlags<T>(this T value, T flags) where T : struct
         {
             return value.SetFlags(flags, true);
@@ -93,6 +98,7 @@ namespace WPFCore.Helper
         /// <param name="value"></param>
         /// <param name="flags"></param>
         /// <returns></returns>
+        [DebuggerStepThrough]
         public static T ClearFlags<T>(this T value, T flags) where T : struct
         {
             return value.SetFlags(flags, false);
@@ -104,6 +110,7 @@ namespace WPFCore.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="flags"></param>
         /// <returns></returns>
+        [DebuggerStepThrough]
         public static T CombineFlags<T>(this IEnumerable<T> flags) where T : struct
         {
             CheckIsEnum<T>(true);
@@ -118,6 +125,7 @@ namespace WPFCore.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
+        [DebuggerStepThrough]
         public static string GetDescription<T>(this T value) where T : struct
         {
             CheckIsEnum<T>(false);

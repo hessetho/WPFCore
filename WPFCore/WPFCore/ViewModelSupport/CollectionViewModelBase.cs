@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Data;
 
@@ -51,7 +52,16 @@ namespace WPFCore.ViewModelSupport
         ///     Used internally only.
         /// </summary>
         private bool ignoreCurrentChange;
+
+        /// <summary>
+        /// Indicates, whether this instance has validated content. It is always <c>True</c>, if this is not a validating collection
+        /// </summary>
         private bool isValid;
+
+        /// <summary>
+        /// Indicates, if this is a collection that should validate it's items.
+        /// </summary>
+        private readonly bool isValidatingCollection;
 
         /// <summary>
         /// Is raised when a refresh of the collection's presentation is suggested (i.e. due to change of filter relevant data)
@@ -66,10 +76,11 @@ namespace WPFCore.ViewModelSupport
         /// </remarks>
         protected CollectionViewModelBase()
         {
-//#if DEBUG
-//            if (Application.Current.Dispatcher != MyDispatcher)
-//                this.MyTraceSource.TraceError(string.Format("{0}: Instances of CollectionViewSource should always be created on the main thread, use InvokeOnAppDispatcher().", this.GetType().Name));
-//#endif
+            //#if DEBUG
+            //            if (Application.Current.Dispatcher != MyDispatcher)
+            //                this.MyTraceSource.TraceError(string.Format("{0}: Instances of CollectionViewSource should always be created on the main thread, use InvokeOnAppDispatcher().", this.GetType().Name));
+            //#endif
+            this.isValidatingCollection = typeof(T).IsSubclassOf(typeof(ValidationViewModelBase));
 
             InvokeOnAppDispatcher(() =>
                 {
@@ -82,14 +93,23 @@ namespace WPFCore.ViewModelSupport
                     this.collectionViewSource.Source = this.observableCollection;
                     this.collectionViewSource.View.CurrentChanged += this.View_CurrentChanged;
                     this.collectionViewSource.View.CurrentChanging += this.View_CurrentChanging;
-                });
 
-            this.Initialized += (ds, de) =>
-            {
-                this.OnPropertyChanged("TotalRowsCount");
-                this.OnPropertyChanged("Count");
-                this.OnPropertyChanged("HasRows");
-            };
+                    // for this event to work savely, it need's to run on the app's thread as well
+                    base.Initialized += this.OnAfterInitialization;
+                });
+        }
+
+        /// <summary>
+        /// Called when the initialization of this instance is finished.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void OnAfterInitialization(object sender, EventArgs e)
+        {
+            // signal a refresh of these properties:
+            OnPropertyChanged("TotalRowsCount");
+            OnPropertyChanged("Count");
+            OnPropertyChanged("HasRows");
         }
 
         /// <summary>
@@ -118,6 +138,35 @@ namespace WPFCore.ViewModelSupport
         public ReadOnlyObservableCollection<T> Source
         {
             get { return this.nativeRows; }
+        }
+
+        /// <summary>
+        /// Determines whether the collection has invalid items.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This function will always return <c>null</c> if the items are not derived from
+        /// <see cref="ValidationViewModelBase"/>.
+        /// </para>
+        /// <para>
+        /// It returns <c>true</c> if at least one item failed validation, otherwise it returns <c>false</c>.
+        /// </para>
+        /// </remarks>
+        /// <returns><c>null</c> if the items are not of type <see cref="ValidationViewModelBase"/>, <c>true</c> if at least one item failed validation, otherwise <c>false</c>.</returns>
+        public bool? HasInvalidItems()
+        {
+            if (typeof(T).IsSubclassOf(typeof(ValidationViewModelBase)))
+                return this.Source.OfType<ValidationViewModelBase>().Any(item => !item.IsValid);
+
+            return (bool?)null;
+        }
+
+        /// <summary>
+        /// Returns <c>True</c> if any collections items has been changed, <c>False</c> otherwise.
+        /// </summary>
+        public override bool HasChanges
+        {
+            get { return this.Source.Any(itm => itm.HasChanges); }
         }
 
         /// <summary>
@@ -376,14 +425,35 @@ namespace WPFCore.ViewModelSupport
         /// <summary>
         /// Validates this instance by validating each contained item.
         /// </summary>
-        public void Validate()
-        {
-            if (typeof(T).IsSubclassOf(typeof(ValidationViewModelBase)))
-            {
-                foreach (var item in this.Source.Cast<ValidationViewModelBase>())
-                    item.Validate();
+        //public void Validate()
+        //{
+        //    if (typeof(T).IsSubclassOf(typeof(ValidationViewModelBase)))
+        //    {
+        //        foreach (var item in this.Source.Cast<ValidationViewModelBase>())
+        //            item.Validate();
 
-                this.IsValid = !this.Source.Cast<ValidationViewModelBase>().Any(itm => itm.IsValid == false);
+        //        this.IsValid = !this.Source.Cast<ValidationViewModelBase>().Any(itm => itm.IsValid == false);
+        //    }
+        //}
+
+        /// <summary>
+        /// Validates this instance by validating each contained item.
+        /// </summary>
+        public virtual void Validate()
+        {
+#if DEBUG
+            if (!this.isValidatingCollection)
+                throw new InvalidOperationException("You should NOT call Validate() on a non-validating collection. Check if <T> derives from ValidationViewModelBase.");
+#endif
+
+            Debug.Assert(this.IsInitializing == false, "WARNING! Validate should NOT be called while IsInitialized is True. Call EndInit() prior.");
+
+            if (this.isValidatingCollection)
+            {
+                foreach (var itm in this.observableCollection.Cast<ValidationViewModelBase>())
+                    itm.Validate();
+
+                this.IsValid = !this.observableCollection.Cast<ValidationViewModelBase>().Any(itm => itm.IsValid == false);
             }
         }
 
@@ -396,14 +466,30 @@ namespace WPFCore.ViewModelSupport
         [DoesNotAffectChangesFlag]
         public bool IsValid
         {
-            get { return this.isValid; }
+            get
+            {
+                var itemsAreValid = true;
+                if (this.isValidatingCollection)
+                    itemsAreValid = !this.observableCollection.Cast<ValidationViewModelBase>().Any(itm => itm.IsValid == false);
+
+                return this.isValid && itemsAreValid;
+            }
             private set
             {
                 if (value == this.isValid) return;
 
                 this.isValid = value;
-                base.OnPropertyChanged("IsValid");
+                OnPropertyChanged("IsValid");
             }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is a validating collection.
+        /// </summary>
+        [DoesNotAffectChangesFlag]
+        public bool IsValidatingCollection
+        {
+            get { return isValidatingCollection; }
         }
 
         /// <summary>

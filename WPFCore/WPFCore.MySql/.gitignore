@@ -1,0 +1,14 @@
+
+# ignore any bin & obj folders
+obj/
+bin/
+
+*.vs
+*.dll
+*.pdb
+*.cache
+*.suo
+*.pdb
+*.lref
+*.cache
+*.baml

@@ -12,8 +12,7 @@ namespace WPFCore.Data.Performance
     {
         private readonly object lockObj = new object();
 
-        private readonly Dictionary<string, Dictionary<string, PerformanceItem>> performanceCategories =
-            new Dictionary<string, Dictionary<string, PerformanceItem>>();
+        private readonly Dictionary<string, Dictionary<string, PerformanceItem>> performanceCategories = new Dictionary<string, Dictionary<string, PerformanceItem>>();
 
         public CategoryDictionary PerformanceCategories
         {
@@ -65,11 +64,12 @@ namespace WPFCore.Data.Performance
             pItem.Add(duration);
         }
 
-        public PerformanceItem StartTiming(string category, string itemName)
+        public SingleStopWatch StartTiming(string category, string itemName)
         {
             var pItem = this.GetPerformanceItem(category, itemName);
-            pItem.StartTiming();
-            return pItem;
+            var stopWatch = new SingleStopWatch(pItem);
+            stopWatch.StartTiming();
+            return stopWatch;
         }
 
         public void StopTiming(string category, string itemName)

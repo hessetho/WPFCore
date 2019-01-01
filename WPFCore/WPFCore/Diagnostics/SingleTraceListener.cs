@@ -76,7 +76,7 @@ namespace WPFCore.Diagnostics
             while (this.queuedMessages.Count > 0)
             {
                 var msg =this.queuedMessages.Dequeue();
-         //       if (!msg.Message.Equals(exclude))
+                if (!msg.Message.Equals(exclude))
                     this.messages.Add(msg);
             }
         }

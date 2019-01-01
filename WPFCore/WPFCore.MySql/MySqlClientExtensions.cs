@@ -15,19 +15,53 @@ namespace WPFCore.MySql
     /// </summary>
     public static class MySqlClientExtensions
     {
+
         /// <summary>
-        ///     Adds a nullable value to the end of the <see cref="System.Data.SqlClient.SqlParameterCollection" />
+        /// Adds a parameter and its value if it does not exist in the parameter collection;
+        /// otherwiese it overwrites the current value.
+        /// </summary>
+        /// <param name="parameters">The <see cref="System.Data.SqlClient.SqlParameterCollection" /> to add or set the value</param>
+        /// <param name="parameterName">The name of the parameter</param>
+        /// <param name="value">The nullable value to be added</param>
+        public static void AddOrSetWithValue(this MySqlParameterCollection parameters, string parameterName, object value)
+        {
+            if (parameters.Contains(parameterName))
+                parameters[parameterName].Value = value;
+            else
+                parameters.AddWithValue(parameterName, value);
+        }
+
+        /// <summary>
+        /// Adds a nullable value to the end of the <see cref="System.Data.SqlClient.SqlParameterCollection" />
         /// </summary>
         /// <param name="parameters">The <see cref="System.Data.SqlClient.SqlParameterCollection" /> to add the value</param>
         /// <param name="parameterName">The name of the parameter</param>
         /// <param name="value">The nullable value to be added</param>
-        public static void AddWithNullableValue(this MySqlParameterCollection parameters, string parameterName,
-            object value)
+        public static void AddWithNullableValue(this MySqlParameterCollection parameters, string parameterName, object value)
         {
             if (value == null || (value is string && (string.IsNullOrEmpty((string)value))))
                 parameters.AddWithValue(parameterName, DBNull.Value);
             else
                 parameters.AddWithValue(parameterName, value);
+        }
+
+        /// <summary>
+        /// Adds a nullable value to the end of the <see cref="System.Data.SqlClient.SqlParameterCollection" />
+        /// </summary>
+        /// <param name="parameters">The <see cref="System.Data.SqlClient.SqlParameterCollection" /> to add the value</param>
+        /// <param name="parameterName">The name of the parameter</param>
+        /// <param name="value">The nullable value to be added</param>
+        public static void AddOrSetWithNullableValue(this MySqlParameterCollection parameters, string parameterName, object value)
+        {
+            if (parameters.Contains(parameterName))
+            {
+                if (value == null || (value is string && (string.IsNullOrEmpty((string)value))))
+                    parameters[parameterName].Value = DBNull.Value;
+                else
+                    parameters[parameterName].Value = value;
+            }
+            else
+                AddWithNullableValue(parameters, parameterName, value);
         }
 
         public static MySqlCommand[] GetCommandCollection<T>(this T tableAdapter)

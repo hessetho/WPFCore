@@ -28,7 +28,7 @@ namespace WPFCore.Data.Performance
             collector.AddItemDuration(category, itemName, duration);
         }
 
-        public static PerformanceItem StartTiming(string category, string itemName)
+        public static SingleStopWatch StartTiming(string category, string itemName)
         {
             return collector.StartTiming(category, itemName);
         }
@@ -54,5 +54,15 @@ namespace WPFCore.Data.Performance
                 foreach (var n in c.Value)
                     Debug.WriteLine(string.Format("{0}\t{1}\t{2}", c.Key, n.ItemName, n.LatestDuration));
         }
+
+        #region database activity logging
+        private static DbActivityCollector dbCollector = new DbActivityCollector();
+
+        public static void AddDbActivity(string activity, string activityTargetName, DbActivityTypeEnum activityType, int rowsAffected, TimeSpan activityDuration, string additionalInformation)
+        {
+            dbCollector.AddDbActivity(activity, activityTargetName, activityType, rowsAffected, activityDuration);
+        }
+
+        #endregion database activity logging
     }
 }

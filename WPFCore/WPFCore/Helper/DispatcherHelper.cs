@@ -31,6 +31,15 @@ namespace WPFCore.Helper
             InvokeIfRequired(control.Dispatcher, DispatcherPriority.Background, methodCall, timeout);
         }
 
+        /// <summary>
+        /// Ensures that a method/action is run on the main application thread.
+        /// </summary>
+        /// <param name="methodCall"></param>
+        public static void InvokeOnAppDispatcher(this DependencyObject control, Action methodCall)
+        {
+            InvokeOnAppDispatcher(methodCall);
+        }
+
 
         public static void InvokeIfRequired(Dispatcher dispatcher, Action methodCall)
         {

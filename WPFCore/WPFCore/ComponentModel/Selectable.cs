@@ -40,7 +40,7 @@ namespace WPFCore.ComponentModel
                 if (this.isSelected == value) return;
 
                 this.isSelected = value;
-                base.OnPropertyChanged("IsSelected");
+                OnPropertyChanged("IsSelected");
 
                 this.SelectionStateChanged?.Invoke(this, new EventArgs());
             }
@@ -72,7 +72,7 @@ namespace WPFCore.ComponentModel
             if (this.isSelected == isSelected) return;
 
             this.isSelected = isSelected;
-            base.OnPropertyChanged("IsSelected");
+            OnPropertyChanged("IsSelected");
         }
     }
 }

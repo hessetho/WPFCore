@@ -10,8 +10,12 @@ namespace WPFCore.Data.Charting
 {
     public class ChartDataPoint : ICustomTypeDescriptor, INotifyPropertyChanged
     {
-        // (Statische) Liste der Properties eines Datenpunktes
+        // (Statische) Liste der Properties eines Datenpunktes für ICustomTypeDescriptor
         private static PropertyDescriptorCollection properties;
+
+        // (Statische) Liste der dynamischen Properties eines Datenpuntes
+        private static string[] dataPointNames;
+
         // Liste der Werte eines Datenpunktes
         private readonly Dictionary<string, MMAValue> values = new Dictionary<string, MMAValue>();
 
@@ -33,12 +37,26 @@ namespace WPFCore.Data.Charting
         /// <param name="dataPointPropertyNames"></param>
         internal void Initialize(string[] dataPointPropertyNames)
         {
-            // Wenn erforderlich, die dynamischen Properties registrieren
-            if (properties == null) this.InitPropertyDescriptors(dataPointPropertyNames);
+            // Die dynamischen Properties registrieren
+            this.InitPropertyDescriptors(dataPointPropertyNames);
 
             // Alle Werte vorbelegen
             foreach (var valueName in dataPointPropertyNames)
                 this.values.Add(valueName, new MMAValue());
+
+            this.isInitialized = true;
+        }
+        /// <summary>
+        /// Initialisiert einen neuen Datenpunkt
+        /// </summary>
+        internal void Initialize()
+        {
+            // Alle Werte vorbelegen
+            foreach (var valueName in dataPointNames)
+            {
+                CheckDataPointName(valueName);
+                this.values.Add(valueName, new MMAValue());
+            }
 
             this.isInitialized = true;
         }
@@ -49,23 +67,44 @@ namespace WPFCore.Data.Charting
             if (!this.isInitialized)
                 throw new InvalidOperationException("ChartDataPoint is not initialized!");
         }
+
+        [Conditional("DEBUG")]
+        private void CheckDataPointName(string dataPointName)
+        {
+            if(!properties.OfType<DPPropertyDescriptor>().Select(p => p.Name).Contains(dataPointName))
+                throw new InvalidOperationException(string.Format("ChartDataPoint is not initialized correctly! Unknown data point name: {0}", dataPointName));
+        }
+
         /// <summary>
-        /// Liefert (oder setzt) den Wert einer Property des Datenpunktes
+        /// Liefert (oder setzt) den Wert einer Property des Datenpunktes.
         /// </summary>
-        /// <param name="propertyName"></param>
+        /// <remarks>
+        /// Ist eine Eigenschaft (<paramref name="propertyName"/>) bei abfragen nicht vorhanden ist, wird stets <c>null</c> zurück gegeben.
+        /// Ist sie beim setzen des Wertes nicht vorhanden, wird sie angelegt.
+        /// </remarks>
+        /// <param name="propertyName">Name der Eigenschaft.</param>
         /// <returns></returns>
         public double? this[string propertyName]
         {
             get
             {
                 this.CheckInit();
-                // Immer den zuletzt zugewiesenen Wert liefern
-                return this.values[propertyName].Last;
+
+                if(this.values.ContainsKey(propertyName))
+                    // Immer den zuletzt zugewiesenen Wert liefern
+                    return this.values[propertyName].Last;
+
+                // wenn die abgefragte Eigenschaft nicht vorhanden ist, geben wir stets NULL zurück
+                return (double?)null;
             }
             set
             {
                 this.CheckInit();
-                this.values[propertyName].SetValue(value);
+                if (!this.values.ContainsKey(propertyName))
+                    this.values.Add(propertyName, new MMAValue(value));
+                else
+                    this.values[propertyName].SetValue(value);
+
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
@@ -159,10 +198,13 @@ namespace WPFCore.Data.Charting
                     pdcList.Add(nativePropDesc);
 
             // Nun die Properties des Datenpunktes als Properties anmelden
-            foreach (var sensorName in propertyNames)
-                pdcList.Add(new DPPropertyDescriptor(sensorName));
+            foreach (var propertyName in propertyNames)
+                pdcList.Add(new DPPropertyDescriptor(propertyName));
 
             properties = new PropertyDescriptorCollection(pdcList.ToArray(), true);
+            dataPointNames = propertyNames;
         }
+
+        
     }
 }

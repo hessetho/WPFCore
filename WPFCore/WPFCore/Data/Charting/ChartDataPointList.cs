@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ namespace WPFCore.Data.Charting
     {
         private readonly SortedDictionary<TKey, TPoint> dataPoints = new SortedDictionary<TKey, TPoint>();
         private readonly string[] dpPropertyNames;
+        private bool needsDPInitialization = true;
 
         public ChartDataPointList(List<string> dataPointPropertyNames)
         {
@@ -29,9 +32,14 @@ namespace WPFCore.Data.Charting
 
         private TPoint NewDataPoint(TKey key)
         {
-
             var chartDp = (TPoint)Activator.CreateInstance(typeof(TPoint));
-            chartDp.Initialize(this.dpPropertyNames);
+            if (needsDPInitialization)
+            {
+                chartDp.Initialize(this.dpPropertyNames);
+                needsDPInitialization = false;
+            }
+            else
+                chartDp.Initialize();
 
             this.dataPoints.Add(key, chartDp);
             return chartDp;
@@ -98,5 +106,27 @@ namespace WPFCore.Data.Charting
             return this.dataPoints.Values.GetEnumerator();
         }
         #endregion IReadOnlyList
+
+        public virtual void DumpDiagnostics()
+        {
+            Debug.WriteLine(string.Empty);
+            Debug.WriteLine("ChartDataPointList diagnostics");
+            Debug.WriteLine(string.Format("TKey  : {0}", typeof(TKey).Name));
+            Debug.WriteLine(string.Format("TPoint: {0}", typeof(TPoint).Name));
+            Debug.WriteLine(string.Format("Count : {0}", this.dataPoints.Count()));
+
+            Debug.WriteLine("Data point names:");
+            Debug.WriteLine(string.Join(", ", this.dpPropertyNames));
+            Debug.WriteLine(string.Empty);
+
+            foreach(var dp in this.dataPoints.Values)
+            {
+                foreach(var prop in ((ICustomTypeDescriptor)dp).GetProperties().OfType<DPPropertyDescriptor>())
+                {
+                    if (!this.dpPropertyNames.Contains(prop.Name))
+                        Debug.WriteLine(string.Format("Inconsistent property name in data point: {0}", prop.Name));
+                }
+            }
+        }
     }
 }

@@ -1,15 +1,17 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace WPFCore.Data.Performance
 {
-    public class PerformanceItem : IDisposable
+    public class PerformanceItem : IDisposable, INotifyPropertyChanged
     {
         private string category;
         private string itemName;
         private DateTime? startTime;
 
         public event EventHandler<PerformanceItem> Stopped;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public PerformanceItem()
         {

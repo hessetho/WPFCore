@@ -127,7 +127,7 @@ namespace WPFCore.ComponentModel
 
         private void OnPropertyChanged(string propertyName)
         {
-            base.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="MultiItemResult.cs" />
     <Compile Include="MySqlClientExtensions.cs" />
+    <Compile Include="MySqlHelper.cs" />
     <Compile Include="QueryWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingleItemResult.cs" />
