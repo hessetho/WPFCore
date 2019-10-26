@@ -63,3 +63,6 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("http://schemas.ICEP.com/wpf/2015/xaml", "WPFCore.XAML.DragDrop")]
 [assembly: XmlnsDefinition("http://schemas.ICEP.com/wpf/2015/xaml", "WPFCore.StatusText")]
 [assembly: XmlnsDefinition("http://schemas.ICEP.com/wpf/2015/xaml", "WPFCore.DataKiosk")]
+
+
+[assembly: XmlnsDefinition("http://schemas.ICEP.com/wpf/2015/xaml", "WPFCore.UserAttraction")]

@@ -23,6 +23,8 @@ namespace WPFCore.Data.Performance
             this.RowsAffected = rowsAffected;
             this.ActivityDuration = activityDuration;
             this.AdditionalInformation = additionalInformation;
+
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
         }
 
         public DateTime EntryTime { get; private set; }

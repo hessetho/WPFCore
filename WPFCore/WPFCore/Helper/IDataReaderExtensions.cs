@@ -41,6 +41,20 @@ namespace WPFCore.Helper
             return reader.GetString(index);
         }
 
+        public static string GetString(this IDataReader reader, int index, string defaultText)
+        {
+            if (reader.IsDBNull(index))
+                return defaultText;
+            else
+                return reader.GetString(index);
+        }
+
+        public static string GetString(this IDataReader reader, string columnName, string defaultText)
+        {
+            var index = reader.GetOrdinal(columnName);
+            return reader.GetString(index, defaultText);
+        }
+
         public static string GetStringNullable(this IDataReader reader, int index)
         {
             return GetStringNullable(reader, index, string.Empty);
@@ -117,16 +131,42 @@ namespace WPFCore.Helper
 
         public static double? GetDoubleNullable(this IDataReader reader, int index)
         {
-            return GetDoubleNullable(reader, index, null);
+            try
+            {
+                if (reader.IsDBNull(index))
+                    return (double?)null;
+
+                return Convert.ToDouble(reader[index]);
+            }
+            catch (Exception e)
+            {
+                e.AddData("index", index);
+                e.AddData("column value", reader[index]);
+
+                throw;
+            }
         }
 
         public static double? GetDoubleNullable(this IDataReader reader, string columnName)
         {
             var index = reader.GetOrdinal(columnName);
-            return GetDoubleNullable(reader, index);
+            try
+            {
+                if (reader.IsDBNull(index))
+                    return (double?)null;
+
+                return Convert.ToDouble(reader[index]);
+            }
+            catch (Exception e)
+            {
+                e.AddData("index", index);
+                e.AddData("column value", reader[index]);
+
+                throw;
+            }
         }
 
-        public static double? GetDoubleNullable(this IDataReader reader, int index, double? defaultValue)
+        public static double GetDouble(this IDataReader reader, int index, double defaultValue)
         {
             try
             {
@@ -145,10 +185,10 @@ namespace WPFCore.Helper
             }
         }
 
-        public static double? GetDoubleNullable(this IDataReader reader, string columnName, double defaultValue)
+        public static double GetDouble(this IDataReader reader, string columnName, double defaultValue)
         {
             var index = reader.GetOrdinal(columnName);
-            return GetDoubleNullable(reader, index, defaultValue);
+            return GetDouble(reader, index, defaultValue);
         }
         #endregion GetDouble extensions
 

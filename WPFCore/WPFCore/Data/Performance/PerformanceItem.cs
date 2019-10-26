@@ -9,6 +9,11 @@ namespace WPFCore.Data.Performance
         private string category;
         private string itemName;
         private DateTime? startTime;
+        private int itemCount;
+        private TimeSpan totalDuration;
+        private TimeSpan minimumDuration;
+        private TimeSpan maximumDuration;
+        private TimeSpan latestDuration;
 
         public event EventHandler<PerformanceItem> Stopped;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -31,9 +36,11 @@ namespace WPFCore.Data.Performance
                 if (string.IsNullOrEmpty(this.category))
                 {
                     this.category = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Category"));
                 }
                 else
                     throw new InvalidOperationException("Category is readonly.");
+
             }
         }
 
@@ -45,25 +52,64 @@ namespace WPFCore.Data.Performance
                 if (string.IsNullOrEmpty(this.itemName))
                 {
                     this.itemName = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ItemName"));
                 }
                 else
                     throw new InvalidOperationException("ItemName is readonly.");
             }
         }
 
-        public int ItemCount { get; set; }
+        public int ItemCount
+        {
+            get => itemCount; set
+            {
+                itemCount = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ItemCount"));
+            }
+        }
 
         [XmlIgnore]
-        public TimeSpan TotalDuration { get; set; }
+        public TimeSpan TotalDuration
+        {
+            get => totalDuration;
+            set
+            {
+                totalDuration = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TotalDuration"));
+            }
+        }
+
 
         [XmlIgnore]
-        public TimeSpan MinimumDuration { get; set; }
+        public TimeSpan MinimumDuration
+        {
+            get => minimumDuration; set
+            {
+                minimumDuration = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("MinimumDuration"));
+            }
+        }
+
 
         [XmlIgnore]
-        public TimeSpan MaximumDuration { get; set; }
+        public TimeSpan MaximumDuration
+        {
+            get => maximumDuration; set
+            {
+                maximumDuration = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("MaximumDuration"));
+            }
+        }
 
         [XmlIgnore]
-        public TimeSpan LatestDuration { get; set; }
+        public TimeSpan LatestDuration
+        {
+            get => latestDuration; set
+            {
+                latestDuration = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LatestDuration"));
+            }
+        }
 
         [XmlIgnore]
         public TimeSpan AverageDuration
@@ -73,7 +119,7 @@ namespace WPFCore.Data.Performance
                 if (this.ItemCount == 0)
                     return new TimeSpan(0);
 
-                return new TimeSpan(this.TotalDuration.Ticks/this.ItemCount);
+                return new TimeSpan(this.TotalDuration.Ticks / this.ItemCount);
             }
         }
 
@@ -104,14 +150,6 @@ namespace WPFCore.Data.Performance
             get { return this.LatestDuration.Ticks; }
             set { this.LatestDuration = new TimeSpan(value); }
         }
-
-        //private void TryRegisterPerformanceItem()
-        //{
-        //    if (string.IsNullOrEmpty(this.category) || string.IsNullOrEmpty(this.itemName))
-        //        return;
-
-        //    PerformanceCenter.AddPerformanceItem(this);
-        //}
 
         public void StartTiming()
         {

@@ -89,6 +89,7 @@ E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextB
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore_MarkupCompile.cache
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore_MarkupCompile.lref
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\themes\BalloonPresenterDefaultStyle.baml
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\themes\DateRangeSelectorDefaultStyle.baml
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\themes\ExceptionGalleryDefaultStyle.baml
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\themes\WPCTextBoxDefaultStyle.baml
@@ -97,7 +98,6 @@ E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\themes\MonthViewDefaultSty
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\XAML\(Internal)\InputTextBoxWindow.baml
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\XAML\Styles\CoreStyles.baml
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore.g.resources
-E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore.csproj.CoreCompileInputs.cache
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore.dll
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore.pdb
-E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore.csprojResolveAssemblyReference.cache
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCore\obj\Debug\WPFCore.csprojAssemblyReference.cache

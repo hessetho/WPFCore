@@ -61,5 +61,7 @@ namespace WPFCore.ViewModelSupport
         {
             return dict.ContainsKey(key);
         }
+
+        public List<TKey> Keys {  get { return this.dict.Keys.ToList(); } }
     }
 }

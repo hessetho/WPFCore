@@ -425,24 +425,6 @@ namespace WPFCore.ViewModelSupport
         public virtual bool HasChanges
         {
             get { return this.hasChanges; }
-            //private set
-            //{
-            //    this.hasChanges = value;
-            //    this.OnPropertyChanged("HasChanges");
-
-            //    if (!this.dontTraceMe && this.hasChanges)
-            //    {
-            //        // note: derived classes which do not implement ITraceInformationProvider should override ToString() to return a meaningful item description
-            //        var itemDescription = this.ToString();
-            //        if (this is ITraceInformationProvider)
-            //            itemDescription = ((ITraceInformationProvider)this).ItemDescription;
-
-            //        this.MyTraceSource.TraceDebug(string.Format("[{0} ({1})] changed \"{2}\"", this.GetType().Name, itemDescription, this.LastChangedProperty));
-            //    }
-
-            //    if (this.hasChanges && this.HasChanged != null)
-            //        this.HasChanged(this, this.LastChangedProperty);
-            //}
         }
 
         private void HasChangesSetter(bool value)
@@ -514,5 +496,42 @@ namespace WPFCore.ViewModelSupport
         public string LastChangedProperty { get; private set; }
 
         #endregion HasChanges
+
+        #region IsNew, IsDeleted
+
+        private bool isNew;
+        private bool isDeleted;
+
+        [DoesNotAffectChangesFlag]
+        [XmlIgnore]
+        /// <summary>
+        /// Indicator to flag this as a new instance
+        /// </summary>
+        public bool IsNew
+        {
+            get { return this.isNew; }
+            set
+            {
+                this.isNew = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [DoesNotAffectChangesFlag]
+        [XmlIgnore]
+        /// <summary>
+        /// Indicator to flag this as a deleted instance 
+        /// </summary>
+        public bool IsDeleted
+        {
+            get { return this.isDeleted; }
+            set
+            {
+                this.isDeleted = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion IsNew, IsDeleted
     }
 }

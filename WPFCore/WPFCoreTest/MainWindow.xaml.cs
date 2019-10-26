@@ -62,5 +62,11 @@ namespace WPFCoreTest
         {
             Debug.WriteLine("double clicked: {0:d} - {1}", (object)e.AppointmentDate, e.AppointmentText);
         }
+
+        private void OnOpenUserAttractionWindowClicked(object sender, RoutedEventArgs e)
+        {
+            var win = new UserAttractionWindow();
+            win.ShowDialog();
+        }
     }
 }

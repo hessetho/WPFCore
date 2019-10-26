@@ -7,7 +7,7 @@ namespace WPFCore.XAML.Converter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value == null) return System.Windows.Visibility.Collapsed;
+            if (value == null) return System.Windows.Visibility.Hidden;
 
             var b = (bool)value;
             var r = parameter == null ? true : System.Convert.ToBoolean(parameter);

@@ -143,6 +143,8 @@
     <Compile Include="StatusText\StatusTextBroker.cs" />
     <Compile Include="StatusText\StatusTextListener.cs" />
     <Compile Include="StatusText\StatusUpdateEventArgs.cs" />
+    <Compile Include="UserAttraction\UserAttraction.cs" />
+    <Compile Include="UserAttraction\UserAttractionAdorner.cs" />
     <Compile Include="ViewModelSupport\%28Advanced%29\DependsOnAttribute.cs" />
     <Compile Include="ViewModelSupport\%28Advanced%29\ExtendedValidationViewModelBase.cs" />
     <Compile Include="ViewModelSupport\ClassValidationAttribute.cs" />
@@ -181,6 +183,8 @@
     <Compile Include="XAML\Behaviors\Internal\ExecutionStrategy.cs" />
     <None Include="XAML\BindableMultiSelection.cs" />
     <Compile Include="XAML\BindingBridge.cs" />
+    <Compile Include="XAML\Controls\%28Balloon%29\Balloon.cs" />
+    <Compile Include="XAML\Controls\%28Balloon%29\BalloonPresenter.cs" />
     <Compile Include="XAML\Controls\DateRangeSelector.cs" />
     <Compile Include="XAML\Controls\EnhancedDataGrid.cs" />
     <Compile Include="XAML\Controls\ExceptionGallery.cs" />
@@ -210,7 +214,6 @@
     <Compile Include="XAML\Converter\ValueConverterGroup.cs" />
     <Compile Include="XAML\Converter\ValueEqualsConverter.cs" />
     <Compile Include="XAML\DataBinder.cs" />
-    <Compile Include="XAML\Docking\IDockedDocument.cs" />
     <Compile Include="XAML\DragDrop\DragDropManager.cs" />
     <Compile Include="XAML\DragDrop\DropPreviewAdorner.cs" />
     <Compile Include="XAML\DragDrop\IDragSourceAdvisor.cs" />
@@ -241,6 +244,10 @@
     <Content Include="XAML\readme.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="themes\BalloonPresenterDefaultStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="themes\DateRangeSelectorDefaultStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -15,5 +15,19 @@ namespace WPFCore.XAML.Ribbon
 
         public ICommand ItemCommand { get; set; }
         public object ItemCommandParameter { get; set; }
+
+        public ImageSource ButtonImage
+        {
+            get
+            {
+                if (this.SmallImageSource != null)
+                    return this.SmallImageSource;
+                else if (this.LargeImageSource != null)
+                    return this.LargeImageSource;
+
+                return null;
+            }
+        }
+
     }
 }

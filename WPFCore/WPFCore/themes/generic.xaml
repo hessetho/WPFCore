@@ -17,6 +17,8 @@
         <ResourceDictionary Source="/WPFCore;component/themes/MonthViewDefaultStyle.xaml"/>
 
         <ResourceDictionary Source="/WPFCore;component/themes/WPCTextBoxDefaultStyle.xaml"/>
+
+        <ResourceDictionary Source="/WPFCore;component/themes/BalloonPresenterDefaultStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:wpc="http://schemas.ICEP.com/wpf/2015/xaml"
         xmlns:vm="clr-namespace:WPFCoreTest"
+        xmlns:a="clr-namespace:WPFCoreTest"
         Title="MainWindow"
         Height="600" Width="800">
     <TabControl>
@@ -81,6 +82,13 @@
                     </Grid>
                 </Border>
             </Grid>
+        </TabItem>
+
+        <TabItem Header="Balloon">
+            <StackPanel>
+                <Button Content="Fenster öffnen"
+                        Click="OnOpenUserAttractionWindowClicked"/>
+            </StackPanel>
         </TabItem>
     </TabControl>
 </Window>

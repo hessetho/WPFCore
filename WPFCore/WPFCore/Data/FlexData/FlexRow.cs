@@ -266,6 +266,16 @@ namespace WPFCore.Data.FlexData
         /// </summary>
         public string UniqueIdentifier { get; private set; }
 
+
+        /// <summary>
+        /// Liefert <c>True</c> wenn die Datenzeile mindestens eine nicht-leere Zelle hat.
+        /// </summary>
+        /// <returns></returns>
+        public bool ContainsValues()
+        {
+            return this.values.Values.Any(v => v != null);
+        }
+
         #region Implementation of ICustomTypeDescriptor
 
         /// <summary>

@@ -115,5 +115,19 @@ namespace WPFCore.Helper
             var checkRegex = new Regex(validCharactersRegex);
             return checkRegex.IsMatch(text);
         }
+
+        /// <summary>
+        /// Liefert <paramref name="replacement"/> zurück, wenn der String <c>Null</c> or <see cref="string.Empty"/> ist.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="replacement"></param>
+        /// <returns></returns>
+        public static string IfNullOrEmpty(this string text, string replacement)
+        {
+            if (string.IsNullOrEmpty(text))
+                return replacement;
+
+            return text;
+        }
     }
 }

@@ -123,6 +123,17 @@ namespace WPFCore.Data.FlexData
         }
 
         /// <summary>
+        /// Add's a column definition
+        /// </summary>
+        /// <param name="displayName">Column header (will be used as propertyName and sourcePropertyName)</param>
+        /// <param name="propertyType">Type of the property/column</param>
+        /// <returns></returns>
+        public FlexColumnDefinition AddColumn(string displayName, Type propertyType)
+        {
+            return this.AddColumn(displayName, propertyType, displayName, displayName);
+        }
+
+        /// <summary>
         ///     Adds a column definition
         /// </summary>
         /// <param name="column">the column definition</param>
@@ -143,6 +154,7 @@ namespace WPFCore.Data.FlexData
                 row.AddColumn(cpd);
         }
 
+        /*
         /// <summary>
         ///     Creates a new data row
         /// </summary>
@@ -154,6 +166,7 @@ namespace WPFCore.Data.FlexData
             row.InitializeRow();
             return row;
         }
+*/
 
         /// <summary>
         ///     Creates a new data row of type &lt;T&gt; which must be inherited from <see cref="FlexRow" />
@@ -161,7 +174,7 @@ namespace WPFCore.Data.FlexData
         /// <typeparam name="T"></typeparam>
         /// <param name="uniqueIdentifier"></param>
         /// <returns></returns>
-        public T NewRow<T>(string uniqueIdentifier) where T : FlexRow
+        public T NewRow(string uniqueIdentifier)
         {
             var row = Activator.CreateInstance<T>();
             row.SetUniqueIdentifier(uniqueIdentifier);

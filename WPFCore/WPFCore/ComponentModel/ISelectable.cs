@@ -17,6 +17,11 @@ namespace WPFCore.ComponentModel
         bool IsSelected { get; set; }
 
         /// <summary>
+        /// Liefert den Anzeigename der Instanz.
+        /// </summary>
+        string DisplayName { get; }
+
+        /// <summary>
         /// Ereignis tritt ein, wenn sich der Auswhalzustand der Instanz ändert.
         /// </summary>
         event EventHandler SelectionStateChanged;

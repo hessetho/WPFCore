@@ -20,5 +20,10 @@ namespace WPFCore.ComponentModel
         /// Liefert eine benutzerfreundliche Bezeichnung.
         /// </summary>
         string DisplayName { get; }
+
+        /// <summary>
+        /// Liefert <c>True</c> wenn das Objekt als gültiger Wert akzeptiert ist, andernfalls <c>False</c>.
+        /// </summary>
+        bool IsValid { get; }
     }
 }

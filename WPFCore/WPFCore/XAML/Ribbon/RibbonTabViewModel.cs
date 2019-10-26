@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace WPFCore.XAML.Ribbon
 {
-    public class RibbonTabViewModel : RibbonItemBase, INotifyPropertyChanged
+    public class RibbonTabViewModel : RibbonItemBase
     {
         private bool isSelected;
         private string contextualTabGroupHeader;
@@ -51,11 +51,5 @@ namespace WPFCore.XAML.Ribbon
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

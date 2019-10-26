@@ -87,7 +87,7 @@ namespace WPFCore.Data.StructuredDataReader
                         }
                     }
 
-                    int rowcount = 15;
+                    //int rowcount = 15;
                     int unIdentifiedCounter = columnDefinitionCollection.Count;
 
                     // Nun die Datenzeilen einlesen und deren Inhalt interpretieren
@@ -109,14 +109,9 @@ namespace WPFCore.Data.StructuredDataReader
                             bool isDouble = false;
                             bool isDateTime = false;
 
-                            int i;
-                            double d;
-                            DateTime dt;
-
-                            isInt = int.TryParse(currentValue, out i);
-                            //isDouble = double.TryParse(currentValue, out d);
+                            isInt = int.TryParse(currentValue, out var i);
                             isDouble = StringHelper.IsDouble(currentValue);
-                            isDateTime = DateTime.TryParse(currentValue, out dt);
+                            isDateTime = DateTime.TryParse(currentValue, out var dt);
 
                             // nun legen wir fest, welchen davon wir nehmen
                             // dabei werden die Regeln zunehmend restriktiver
@@ -267,7 +262,7 @@ namespace WPFCore.Data.StructuredDataReader
                         string[] values = currentLine.SplitQuoted(this.InternalColumnDelimiter[0]);
 
                         // Eine neue Datenzeile erzeugen
-                        var row = result.Rows.NewRow<StructuredDataRow>("");
+                        var row = result.Rows.NewRow("");
                         row.RowNumber = rowCounter;
                         row.RawData = currentLine;
 
@@ -293,7 +288,7 @@ namespace WPFCore.Data.StructuredDataReader
                     } while (currentLine != null && errorCount<50);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //rows.AddError(e, "Unbehandelte Ausnahme entdeckt.");
             }

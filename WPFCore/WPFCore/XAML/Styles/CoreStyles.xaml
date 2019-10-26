@@ -1037,4 +1037,18 @@
         </Setter>
     </Style>
 
+    <Style TargetType="ToolTip" x:Key="MyTooltip">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="HasDropShadow" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <ContentPresenter Margin="4"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 </ResourceDictionary>

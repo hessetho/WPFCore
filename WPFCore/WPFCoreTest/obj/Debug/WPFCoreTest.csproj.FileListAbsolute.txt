@@ -51,3 +51,5 @@ E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest.csproj.Gen
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest_MarkupCompile.lref
 E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\WPFCoreTest.csproj.CoreCompileInputs.cache
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\UserAttractionWindow.g.cs
+E:\Dokumente\GitHub\WPFCore\WPFCore\WPFCoreTest\obj\Debug\UserAttractionWindow.baml
