@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using WPFCore.Helper;
 
@@ -312,6 +313,21 @@ namespace WPFCore.Helper
         }
 
         #endregion GetBoolean extensions
+
+        /// <summary>
+        ///     Adds a nullable value to the end of the <see cref="System.Data.SqlClient.SqlParameterCollection" />
+        /// </summary>
+        /// <param name="parameters">The <see cref="System.Data.SqlClient.SqlParameterCollection" /> to add the value</param>
+        /// <param name="parameterName">The name of the parameter</param>
+        /// <param name="value">The nullable value to be added</param>
+        public static void AddWithNullableValue(this SqlParameterCollection parameters, string parameterName,
+            object value)
+        {
+            if (value == null || (value is string && (string.IsNullOrEmpty((string)value))))
+                parameters.AddWithValue(parameterName, DBNull.Value);
+            else
+                parameters.AddWithValue(parameterName, value);
+        }
 
         [Conditional("DEBUG")]
         public static void DumpValues(this DbDataReader reader)

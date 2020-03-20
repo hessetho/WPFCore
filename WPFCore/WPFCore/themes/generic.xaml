@@ -19,6 +19,9 @@
         <ResourceDictionary Source="/WPFCore;component/themes/WPCTextBoxDefaultStyle.xaml"/>
 
         <ResourceDictionary Source="/WPFCore;component/themes/BalloonPresenterDefaultStyle.xaml"/>
+
+        <ResourceDictionary Source="/WPFCore;component/themes/WaitAnimationDefaultStyle.xaml"/>
+
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
